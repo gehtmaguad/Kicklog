@@ -20,3 +20,10 @@
 	border-color: white;
 	margin-top: 50px;
 }
+.home-client-bg {
+	background-color: white;
+	border: 15px solid;
+	border-radius: 15px;
+	border-color: white;
+	margin-top: 10%;
+}
