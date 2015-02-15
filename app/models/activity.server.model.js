@@ -14,7 +14,16 @@ var ActivitySchema = new Schema({
 		type: String,
 		default: '',
 		required: 'Please fill Activity name',
-		trim: true
+		trim: true /*Removes Whitespace from Beginning and End from String */
+	},
+	description: {
+		type: String,
+		default: '',
+		required: 'Please fill Activity description',
+		trim: true /*Removes Whitespace from Beginning and End from String */
+	},
+	active: {
+		type: Boolean
 	},
 	created: {
 		type: Date,
@@ -23,7 +32,9 @@ var ActivitySchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+	entries: [
+	]
 });
 
 mongoose.model('Activity', ActivitySchema);
