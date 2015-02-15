@@ -9,7 +9,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 		$scope.create = function() {
 			// Create new Activity object
 			var activity = new Activities ({
-				name: this.name
+				name: this.name,
+				description: this.description,
+				active: this.active
 			});
 
 			// Redirect after save
@@ -18,6 +20,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
 				// Clear form fields
 				$scope.name = '';
+				$scope.description = '';
+				$scope.active = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
