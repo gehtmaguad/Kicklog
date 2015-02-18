@@ -1,0 +1,44 @@
+<section data-ng-controller="ActivitiesController">
+    <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4 login-from-bg">
+        <h3 class="text-center">New Activity</h3>
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+		    <div data-ng-show="error" class="text-danger text-danger">
+                        <div class="alert alert-danger" role="alert">
+		            <strong data-ng-bind="error"></strong>
+                        </div>
+		    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <i class="text-muted glyphicon glyphicon-flag"></i>
+                        </span>
+                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Activity Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <i class="text-muted glyphicon glyphicon-tags"></i>
+                        </span>
+                        <input type="text" data-ng-model="description" id="description" class="form-control" placeholder="Description" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <label class="form-control">Mark Activity as active?</label>
+                        <span class="input-group-addon" id="basic-addon1">
+                            <input type="checkbox" data-ng-model="active" id="active" checked>
+                        </span>
+                    </div>
+                </div>
+                </br>
+                <div class="text-center form-group">
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Create Activity</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>
