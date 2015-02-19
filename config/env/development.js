@@ -30,6 +30,7 @@ module.exports = {
 		clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
 		callbackURL: '/auth/github/callback'
 	},
+	/*
 	mailer: {
 		from: process.env.MAILER_FROM || 'MAILER_FROM',
 		options: {
@@ -39,5 +40,16 @@ module.exports = {
 				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
 			}
 		}
-	}
+	} 
+	*/
+	mailer: {
+		from: 'postmaster@sandboxbefecf8e0dd14c7c913c18c35ec022af.mailgun.org',
+		options: {
+			service: 'Mailgun',
+			auth: {
+				user: 'postmaster@sandboxbefecf8e0dd14c7c913c18c35ec022af.mailgun.org',
+				pass: '35c45266785ed9429cc752770af3c5f6'
+			}
+		}
+	}	
 };
