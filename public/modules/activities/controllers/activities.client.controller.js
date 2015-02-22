@@ -4,13 +4,44 @@
 
 var activityApp = angular.module('activities');
 
-activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authentication', 'Activities',
-	function($scope, $stateParams, Authentication, Activities) {
+activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authentication', 'Activities', '$modal', '$log',
+	function($scope, $stateParams, Authentication, Activities, $modal, $log) {
 		
 		this.authentication = Authentication;
 		
 		// Find a list of Activities
 		this.activities = Activities.query();
+		
+		// Open a modal window to Update a Activity Record
+		this.modalUpdate = function (size, selectedActivity) {
+
+	    var modalInstance = $modal.open({
+	      templateUrl: 'modules/activities/views/edit-activity.client.view.html',
+	      controller: function ($scope, $modalInstance, activity) {
+	      	$scope.activity = activity;
+	      	
+				  $scope.ok = function () {
+				    $modalInstance.close($scope.activity);
+				  };
+				
+				  $scope.cancel = function () {
+				    $modalInstance.dismiss('cancel');
+				  };	      	
+	      },
+	      size: size,
+	      resolve: {
+	        activity: function () {
+	          return selectedActivity;
+	        }
+	      }
+	    });
+	
+	    modalInstance.result.then(function (selectedItem) {
+	      $scope.selected = selectedItem;
+	    }, function () {
+	      $log.info('Modal dismissed at: ' + new Date());
+	    });
+	  };
 
 	}
 ]);
@@ -21,8 +52,19 @@ activityApp.controller('ActivitiesCreateController', ['$scope', 'Activities',
 	}
 ]);
 
-activityApp.controller('ActivitiesEditController', ['$scope','Activities',
+activityApp.controller('ActivitiesUpdateController', ['$scope','Activities',
 	function($scope, Activities) {
+		
+		// Update existing Activity
+		this.update = function(updatedActivity) {
+			var activity = updatedActivity;
+
+			activity.$update(function() {
+
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
 		
 	}
 ]);
@@ -68,16 +110,7 @@ activityApp.controller('ActivitiesEditController', ['$scope','Activities',
 		// 	}
 		// };
 
-		// // Update existing Activity
-		// $scope.update = function() {
-		// 	var activity = $scope.activity;
 
-		// 	activity.$update(function() {
-		// 		$location.path('activities/' + activity._id);
-		// 	}, function(errorResponse) {
-		// 		$scope.error = errorResponse.data.message;
-		// 	});
-		// };
 
 
 

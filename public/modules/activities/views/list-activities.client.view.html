@@ -1,9 +1,4 @@
 <section data-ng-controller="ActivitiesController as activitiesCtrl">
-    <!--
-    <div class="login-from-bg">
-        <h3 class="text-center">Activities</h3>
-    </div>
-    -->
     </br>
     </br>
     <div class="row">
@@ -16,8 +11,8 @@
         </div><!-- /input-group -->
       </div>
       <div class="col-xs-12 col-sm-4 text-center">
-          <button type="button" class="btn btn-success text-center">
-            <i class="glyphicon glyphicon-user"></i> </br>
+          <button type="button" class="btn btn-primary text-center">
+            <i class="glyphicon glyphicon-cog"></i> </br>
             New Activity
           </button>
       </div>
@@ -26,7 +21,7 @@
     </br>
     <div class="list-group">
         <div class="col-xs-6 col-sm-4" data-ng-repeat="activity in activitiesCtrl.activities | filter:searchText">
-            <a  data-ng-href="#!/activities/{{activity._id}}" class="list-group-item">
+            <a  ng-click="activitiesCtrl.modalUpdate('lg', activity)" class="list-group-item">
                 <h1 class="text-center">{{activity.name}}</h1>
                 <h4>{{activity.description}}</h4>
             </a>

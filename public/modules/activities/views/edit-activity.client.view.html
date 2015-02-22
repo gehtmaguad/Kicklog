@@ -1,23 +1,50 @@
-<section data-ng-controller="ActivitiesController" data-ng-init="findOne()">
-    <div class="page-header">
-        <h1>Edit Activity</h1>
+<section data-ng-controller="ActivitiesUpdateController as activityUpCtrl">
+    
+    <div class="modal-header">
+        <h3 class="modal-title">Edit Activity</h3>
     </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="activity.name" id="name" class="form-control" placeholder="Name" required>
+    <div class="modal-body">
+            <form>
+                <fieldset>
+                    <div class="form-group">
+    		            <div data-ng-show="error" class="text-danger text-danger">
+                            <div class="alert alert-danger" role="alert">
+    		                    <strong data-ng-bind="error"></strong>
+                            </div>
+    		            </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
+                    <div class="form-group">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="basic-addon1">
+                                <i class="text-muted glyphicon glyphicon-flag"></i>
+                            </span>
+                            <input type="text" data-ng-model="activity.name" id="name" class="form-control" placeholder="Activity Name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="basic-addon1">
+                                <i class="text-muted glyphicon glyphicon-tags"></i>
+                            </span>
+                            <input type="text" data-ng-model="activity.description" id="description" class="form-control" placeholder="Description" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group input-group-lg">
+                            <label class="form-control">Mark Activity as active?</label>
+                            <span class="input-group-addon" id="basic-addon1">
+                                <input type="checkbox" data-ng-model="activity.active" id="active" checked>
+                            </span>
+                        </div>
+                    </div>
+                    </br>
+
+                </fieldset>
+            </form>
     </div>
-</section>
+    <div class="modal-footer">
+        <button class="btn btn-success" ng-click="activityUpCtrl.update(activity); ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>    
+
+</section>				
