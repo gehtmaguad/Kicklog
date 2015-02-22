@@ -5,8 +5,27 @@
     </div>
     -->
     </br>
+    </br>
+    <div class="row">
+      <div class="col-xs-12 col-sm-8">
+        <div class="input-group input-group-lg">
+          <input type="text" class="form-control" placeholder="Search for..." ng-model="searchText">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div><!-- /input-group -->
+      </div>
+      <div class="col-xs-12 col-sm-4 text-center">
+          <button type="button" class="btn btn-success text-center">
+            <i class="glyphicon glyphicon-user"></i> </br>
+            New Activity
+          </button>
+      </div>
+    </div>
+    </br>
+    </br>
     <div class="list-group">
-        <div class="col-xs-6 col-sm-4" data-ng-repeat="activity in activitiesCtrl.activities">
+        <div class="col-xs-6 col-sm-4" data-ng-repeat="activity in activitiesCtrl.activities | filter:searchText">
             <a  data-ng-href="#!/activities/{{activity._id}}" class="list-group-item">
                 <h1 class="text-center">{{activity.name}}</h1>
                 <h4>{{activity.description}}</h4>
