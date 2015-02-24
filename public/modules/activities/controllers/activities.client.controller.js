@@ -74,7 +74,17 @@ activityApp.controller('ActivitiesUpdateController', ['$scope','Activities',
 		
 	}
 ]);
-		
+
+activityApp.directive('activityList', [function() {
+	return {
+		restrict: 'E',
+		transclude: true,
+		templateUrl: 'modules/activities/views/activity-list-template.html',
+		link: function(scope, element, attrs) {
+			
+		}
+	};
+}]);
 
 
 		// // Create new Activity
