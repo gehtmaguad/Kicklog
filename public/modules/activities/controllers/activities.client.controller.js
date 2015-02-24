@@ -21,7 +21,13 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	      	$scope.activity = activity;
 	      	
 				  $scope.ok = function () {
-				    $modalInstance.close($scope.activity);
+				  	
+				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// if (updateActivityForm.$valid) {
+				    // 	$modalInstance.close($scope.activity);
+				  	// }
+				  	$modalInstance.close($scope.activity);
+				  	
 				  };
 				
 				  $scope.cancel = function () {
