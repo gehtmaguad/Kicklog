@@ -42,6 +42,11 @@
             </form>
     </div>
     <div class="modal-footer">
+        
+        <span class="pull-left">
+            <button class="btn btn-danger" ng-click="activityUpCtrl.remove(activity); cancel()">Delete</button>
+        </span>        
+        
         <button class="btn btn-success" ng-click="activityUpCtrl.update(activity); ok()" ng-disabled="updateActivityForm.$invalid">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>    

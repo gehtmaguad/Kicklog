@@ -12,6 +12,36 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 		// Find a list of Activities
 		this.activities = Activities.query();
 		
+		// Open a modal window to Create a Activity Record
+		this.modalCreate = function (size) {
+
+	    var modalInstance = $modal.open({
+	      templateUrl: 'modules/activities/views/create-activity.client.view.html',
+	      controller: function ($scope, $modalInstance) {
+	      	
+				  $scope.ok = function () {
+				  	
+				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// if (createActivityForm.$valid) {
+				    // 	$modalInstance.close();
+				  	// }
+				  	$modalInstance.close();
+				  	
+				  };
+				
+				  $scope.cancel = function () {
+				    $modalInstance.dismiss('cancel');
+				  };	      	
+	      },
+	      size: size,
+	    });
+	
+	    modalInstance.result.then(function (selectedItem) {
+	    }, function () {
+	      $log.info('Modal dismissed at: ' + new Date());
+	    });
+	  };		
+		
 		// Open a modal window to Update a Activity Record
 		this.modalUpdate = function (size, selectedActivity) {
 
@@ -52,14 +82,32 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	}
 ]);
 
-activityApp.controller('ActivitiesCreateController', ['$scope', 'Activities',
-	function($scope, Activities) {
+activityApp.controller('ActivitiesCreateController', ['$scope', 'Activities', 'Notify',
+	function($scope, Activities, Notify ) {
 		
+		// Create new Activity
+		this.create = function() {
+			// Create new Activity object
+			var activity = new Activities ({
+				name: this.name,
+				description: this.description,
+				active: this.active
+			});
+
+			// Redirect after save
+			activity.$save(function(response) {
+				
+				Notify.sendMsg('NewActivity', {'id': response._id});
+
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
 	}
 ]);
 
-activityApp.controller('ActivitiesUpdateController', ['$scope','Activities',
-	function($scope, Activities) {
+activityApp.controller('ActivitiesUpdateController', ['$scope','Activities', 'Notify',
+	function($scope, Activities, Notify) {
 		
 		// Update existing Activity
 		this.update = function(updatedActivity) {
@@ -72,63 +120,44 @@ activityApp.controller('ActivitiesUpdateController', ['$scope','Activities',
 			});
 		};
 		
+		// Remove existing Activity
+		this.remove = function(deleteActivity) {
+			var activity = deleteActivity;
+			
+			if ( activity ) { 
+				activity.$remove(function(response){
+					Notify.sendMsg('NewActivity', {'id': response._id});
+				});
+
+				for (var i in this.activities) {
+					if (this.activities [i] === activity) {
+						this.activities.splice(i, 1);
+					}
+				}
+			} else {
+				this.activity.$remove(function() {
+				});
+			}
+		};		
+		
 	}
 ]);
 
-activityApp.directive('activityList', [function() {
+activityApp.directive('activityList', ['Activities', 'Notify', function(Activities,Notify) {
 	return {
 		restrict: 'E',
 		transclude: true,
 		templateUrl: 'modules/activities/views/activity-list-template.html',
 		link: function(scope, element, attrs) {
 			
+			// when a new activity is added, update the activity list
+			Notify.getMsg('NewActivity', function(event, data) {
+				// Find a list of Activities
+				scope.activitiesCtrl.activities = Activities.query();
+			});
 		}
 	};
 }]);
-
-
-		// // Create new Activity
-		// $scope.create = function() {
-		// 	// Create new Activity object
-		// 	var activity = new Activities ({
-		// 		name: this.name,
-		// 		description: this.description,
-		// 		active: this.active
-		// 	});
-
-		// 	// Redirect after save
-		// 	activity.$save(function(response) {
-		// 		$location.path('activities/' + response._id);
-
-		// 		// Clear form fields
-		// 		$scope.name = '';
-		// 		$scope.description = '';
-		// 		$scope.active = '';
-		// 	}, function(errorResponse) {
-		// 		$scope.error = errorResponse.data.message;
-		// 	});
-		// };
-
-		// // Remove existing Activity
-		// $scope.remove = function(activity) {
-		// 	if ( activity ) { 
-		// 		activity.$remove();
-
-		// 		for (var i in $scope.activities) {
-		// 			if ($scope.activities [i] === activity) {
-		// 				$scope.activities.splice(i, 1);
-		// 			}
-		// 		}
-		// 	} else {
-		// 		$scope.activity.$remove(function() {
-		// 			$location.path('activities');
-		// 		});
-		// 	}
-		// };
-
-
-
-
 
 		// // Find existing Activity
 		// $scope.findOne = function() {
