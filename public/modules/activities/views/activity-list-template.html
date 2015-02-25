@@ -1,5 +1,5 @@
 <div class="list-group">
-    <div class="col-xs-6 col-sm-4" data-ng-repeat="activity in activitiesCtrl.activities | filter:searchText">
+    <div class="col-xs-6 col-sm-4 adding-vertical-space" data-ng-repeat="activity in activitiesCtrl.activities | filter:searchText">
         <a  ng-click="activitiesCtrl.modalUpdate('lg', activity)" class="list-group-item">
             <h1 class="text-center">{{activity.name}}</h1>
             <h4>{{activity.description}}</h4>
