@@ -43,12 +43,12 @@ module.exports = {
 	} 
 	*/
 	mailer: {
-		from: 'postmaster@sandboxbefecf8e0dd14c7c913c18c35ec022af.mailgun.org',
+		from: 'Mean Stack Admin <markus.hoesel@gmx.at>',
 		options: {
 			service: 'Mailgun',
 			auth: {
-				user: 'postmaster@sandboxbefecf8e0dd14c7c913c18c35ec022af.mailgun.org',
-				pass: '35c45266785ed9429cc752770af3c5f6'
+				user: 'postmaster@mg.gehtmaguad.at',
+				pass: 'c6818d46877fc9360c1673600ca061b0'
 			}
 		}
 	}	
