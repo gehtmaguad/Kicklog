@@ -43,12 +43,262 @@ angular.element(document).ready(function() {
 });
 'use strict';
 
+// Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('activities');
+'use strict';
+
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('core');
 'use strict';
 
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');
+'use strict';
+
+// Configuring the Articles module
+angular.module('activities').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('topbar', 'Activities', 'activities', 'dropdown', '/activities(/create)?');
+		Menus.addSubMenuItem('topbar', 'activities', 'List Activities', 'activities');
+		Menus.addSubMenuItem('topbar', 'activities', 'New Activity', 'activities/create');
+	}
+]);
+'use strict';
+
+//Setting up route
+angular.module('activities').config(['$stateProvider',
+	function($stateProvider) {
+		// Activities state routing
+		$stateProvider.
+		state('listActivities', {
+			url: '/activities',
+			templateUrl: 'modules/activities/views/list-activities.client.view.html'
+		}).
+		state('createActivity', {
+			url: '/activities/create',
+			templateUrl: 'modules/activities/views/create-activity.client.view.html'
+		}).
+		state('viewActivity', {
+			url: '/activities/:activityId',
+			templateUrl: 'modules/activities/views/view-activity.client.view.html'
+		}).
+		state('editActivity', {
+			url: '/activities/:activityId/edit',
+			templateUrl: 'modules/activities/views/edit-activity.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+// Activities controller
+
+var activityApp = angular.module('activities');
+
+activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authentication', 'Activities', '$modal', '$log',
+	function($scope, $stateParams, Authentication, Activities, $modal, $log) {
+		
+		this.authentication = Authentication;
+		
+		// Find a list of Activities
+		this.activities = Activities.query();
+		
+		// Open a modal window to Create a Activity Record
+		this.modalCreate = function (size) {
+
+	    var modalInstance = $modal.open({
+	      templateUrl: 'modules/activities/views/create-activity.client.view.html',
+	      controller: ["$scope", "$modalInstance", function ($scope, $modalInstance) {
+	      	
+				  $scope.ok = function () {
+				  	
+				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// if (createActivityForm.$valid) {
+				    // 	$modalInstance.close();
+				  	// }
+				  	$modalInstance.close();
+				  	
+				  };
+				
+				  $scope.cancel = function () {
+				    $modalInstance.dismiss('cancel');
+				  };	      	
+	      }],
+	      size: size,
+	    });
+	
+	    modalInstance.result.then(function (selectedItem) {
+	    }, function () {
+	      $log.info('Modal dismissed at: ' + new Date());
+	    });
+	  };		
+		
+		// Open a modal window to Update a Activity Record
+		this.modalUpdate = function (size, selectedActivity) {
+
+	    var modalInstance = $modal.open({
+	      templateUrl: 'modules/activities/views/edit-activity.client.view.html',
+	      controller: ["$scope", "$modalInstance", "activity", function ($scope, $modalInstance, activity) {
+	      	$scope.activity = activity;
+	      	
+				  $scope.ok = function () {
+				  	
+				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// if (updateActivityForm.$valid) {
+				    // 	$modalInstance.close($scope.activity);
+				  	// }
+				  	$modalInstance.close($scope.activity);
+				  	
+				  };
+				
+				  $scope.cancel = function () {
+				    $modalInstance.dismiss('cancel');
+				  };	      	
+	      }],
+	      size: size,
+	      resolve: {
+	        activity: function () {
+	          return selectedActivity;
+	        }
+	      }
+	    });
+	
+	    modalInstance.result.then(function (selectedItem) {
+	      $scope.selected = selectedItem;
+	    }, function () {
+	      $log.info('Modal dismissed at: ' + new Date());
+	    });
+	  };
+
+	}
+]);
+
+activityApp.controller('ActivitiesCreateController', ['$scope', 'Activities', 'Notify',
+	function($scope, Activities, Notify ) {
+		
+		// Create new Activity
+		this.create = function() {
+			// Create new Activity object
+			var activity = new Activities ({
+				name: this.name,
+				description: this.description,
+				active: this.active
+			});
+
+			// Redirect after save
+			activity.$save(function(response) {
+				
+				Notify.sendMsg('NewActivity', {'id': response._id});
+
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+	}
+]);
+
+activityApp.controller('ActivitiesUpdateController', ['$scope','Activities', 'Notify',
+	function($scope, Activities, Notify) {
+		
+		// Update existing Activity
+		this.update = function(updatedActivity) {
+			var activity = updatedActivity;
+
+			activity.$update(function() {
+
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+		
+		// Remove existing Activity
+		this.remove = function(deleteActivity) {
+			var activity = deleteActivity;
+			
+			if ( activity ) { 
+				activity.$remove(function(response){
+					Notify.sendMsg('NewActivity', {'id': response._id});
+				});
+
+				for (var i in this.activities) {
+					if (this.activities [i] === activity) {
+						this.activities.splice(i, 1);
+					}
+				}
+			} else {
+				this.activity.$remove(function() {
+				});
+			}
+		};		
+		
+	}
+]);
+
+activityApp.directive('activityList', ['Activities', 'Notify', function(Activities,Notify) {
+	return {
+		restrict: 'E',
+		transclude: true,
+		templateUrl: 'modules/activities/views/activity-list-template.html',
+		link: function(scope, element, attrs) {
+			
+			// when a new activity is added, update the activity list
+			Notify.getMsg('NewActivity', function(event, data) {
+				// Find a list of Activities
+				scope.activitiesCtrl.activities = Activities.query();
+			});
+		}
+	};
+}]);
+
+		// // Find existing Activity
+		// $scope.findOne = function() {
+		// 	$scope.activity = Activities.get({ 
+		// 		activityId: $stateParams.activityId
+		// 	});
+		// };
+
+'use strict';
+
+//Activities service used to communicate Activities REST endpoints
+
+angular.module('activities')
+
+.factory('Activities', ['$resource',
+	function($resource) {
+		return $resource('activities/:activityId', { activityId: '@_id'
+		}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+	}
+])
+
+.factory('Notify', ['$rootScope',
+	function($rootScope) {
+		
+		var notify = {};
+		
+		notify.sendMsg = function(msg, data) {
+			data = data || {};
+			$rootScope.$emit(msg, data);
+			
+			console.log('message sent!');
+		};
+		
+		notify.getMsg = function(msg, func, scope) {
+			var unbind = $rootScope.$on(msg, func);
+			
+			if (scope) {
+				scope.$on('destroy', unbind);
+			}
+		};
+		
+		return notify;
+
+	}
+])
+;
 'use strict';
 
 // Setting up route
@@ -90,6 +340,34 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 	function($scope, Authentication) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
+		$scope.alerts = [
+			{
+				icon: 'glyphicon-user',
+				colour: 'btn-success',
+				total: '124',
+				description: 'TOTAL USERS'
+			},
+			{
+				icon: 'glyphicon-flag',
+				colour: 'btn-info',
+				total: '345',
+				description: 'TOTAL ACTIVITIES'
+			},
+			{
+				icon: 'glyphicon-pencil',
+				colour: 'btn-danger',
+				total: '125334',
+				description: 'TOTAL ENTRIES'
+			},
+			{
+				icon: 'glyphicon-time',
+				colour: 'btn-warning',
+				total: '13465 hours',
+				description: 'TOTAL TIME SPENT'
+			}
+		];
+
+
 	}
 ]);
 'use strict';
