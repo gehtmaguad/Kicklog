@@ -78,6 +78,43 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	      $log.info('Modal dismissed at: ' + new Date());
 	    });
 	  };
+	  
+		// Open a modal window to Update a Activity Record
+		this.modalPush = function (size, selectedActivity) {
+
+	    var modalInstance = $modal.open({
+	      templateUrl: 'modules/activities/views/create-activity-entry.client.view.html',
+	      controller: function ($scope, $modalInstance, activity) {
+	      	$scope.activity = activity;
+	      	
+				  $scope.ok = function () {
+				  	
+				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// if (updateActivityForm.$valid) {
+				    // 	$modalInstance.close($scope.activity);
+				  	// }
+				  	$modalInstance.close($scope.activity);
+				  	
+				  };
+				
+				  $scope.cancel = function () {
+				    $modalInstance.dismiss('cancel');
+				  };	      	
+	      },
+	      size: size,
+	      resolve: {
+	        activity: function () {
+	          return selectedActivity;
+	        }
+	      }
+	    });
+	
+	    modalInstance.result.then(function (selectedItem) {
+	      $scope.selected = selectedItem;
+	    }, function () {
+	      $log.info('Modal dismissed at: ' + new Date());
+	    });
+	  };	  
 
 	}
 ]);
@@ -99,6 +136,25 @@ activityApp.controller('ActivitiesCreateController', ['$scope', 'Activities', 'N
 				
 				Notify.sendMsg('NewActivity', {'id': response._id});
 
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+	}
+]);
+
+activityApp.controller('ActivitiesPushController', ['$scope', 'Activities', 'Notify',
+	function($scope, Activities, Notify ) {
+		
+		// Push Entry to Activity
+		this.push = function(pushActivity) {
+			var activity = pushActivity;
+			activity.entries.push({
+				entryText: this.entryText
+			});
+			
+			activity.$update(function() {
+			
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

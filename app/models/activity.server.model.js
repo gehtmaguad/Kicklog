@@ -34,6 +34,16 @@ var ActivitySchema = new Schema({
 		ref: 'User'
 	},
 	entries: [
+		{ 
+			entryText: {
+				type: String, 
+				trim: true
+			}, 
+			entryDate: {
+				type: Date,
+				default: Date.now()
+			}
+		}
 	]
 });
 
