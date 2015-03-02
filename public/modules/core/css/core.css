@@ -14,7 +14,8 @@
 	border-color: #78FA89;
 }
 body {
-	background: url("../img/motivation.jpg") no-repeat center center fixed; 
+	/*background: url("../img/motivation.jpg") no-repeat center center fixed; */
+	background: url("/modules/core/img/motivation.jpg") no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
