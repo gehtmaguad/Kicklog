@@ -6,6 +6,6 @@ angular.module('activities').run(['Menus',
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Activities', 'activities', 'dropdown', '/activities(/create)?');
 		Menus.addSubMenuItem('topbar', 'activities', 'List Activities', 'activities');
-		Menus.addSubMenuItem('topbar', 'activities', 'New Activity', 'activities/create');
+		//Menus.addSubMenuItem('topbar', 'activities', 'New Activity', 'activities/create');
 	}
 ]);

@@ -13,6 +13,6 @@ angular.module('activities').config(['$stateProvider',
 			url: '/activities/:activityId',
 			//templateUrl: 'modules/activities/views/view-activity.client.view.html'
 			templateUrl: 'modules/activities/views/list-activity-entries.client.view.html'
-		})
+		});
 	}
 ]);
