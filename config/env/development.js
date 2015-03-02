@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://gehtmaguad:ikt255M88@ds045031.mongolab.com:45031/mean-database',
 	app: {
-		title: 'merciless - Development Environment'
+		title: 'gehtmaguad - Development Environment'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
