@@ -61,7 +61,7 @@ angular.module('activities').run(['Menus',
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Activities', 'activities', 'dropdown', '/activities(/create)?');
 		Menus.addSubMenuItem('topbar', 'activities', 'List Activities', 'activities');
-		Menus.addSubMenuItem('topbar', 'activities', 'New Activity', 'activities/create');
+		//Menus.addSubMenuItem('topbar', 'activities', 'New Activity', 'activities/create');
 	}
 ]);
 'use strict';
@@ -75,17 +75,10 @@ angular.module('activities').config(['$stateProvider',
 			url: '/activities',
 			templateUrl: 'modules/activities/views/list-activities.client.view.html'
 		}).
-		state('createActivity', {
-			url: '/activities/create',
-			templateUrl: 'modules/activities/views/create-activity.client.view.html'
-		}).
 		state('viewActivity', {
 			url: '/activities/:activityId',
-			templateUrl: 'modules/activities/views/view-activity.client.view.html'
-		}).
-		state('editActivity', {
-			url: '/activities/:activityId/edit',
-			templateUrl: 'modules/activities/views/edit-activity.client.view.html'
+			//templateUrl: 'modules/activities/views/view-activity.client.view.html'
+			templateUrl: 'modules/activities/views/list-activity-entries.client.view.html'
 		});
 	}
 ]);
@@ -169,6 +162,50 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	      $log.info('Modal dismissed at: ' + new Date());
 	    });
 	  };
+	  
+		// Open a modal window to Update a Activity Record
+		this.modalPush = function (size, selectedActivity) {
+
+	    var modalInstance = $modal.open({
+	      templateUrl: 'modules/activities/views/create-activity-entry.client.view.html',
+	      controller: ["$scope", "$modalInstance", "activity", function ($scope, $modalInstance, activity) {
+	      	$scope.activity = activity;
+	      	
+				  $scope.ok = function () {
+				  	
+				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// if (updateActivityForm.$valid) {
+				    // 	$modalInstance.close($scope.activity);
+				  	// }
+				  	$modalInstance.close($scope.activity);
+				  	
+				  };
+				
+				  $scope.cancel = function () {
+				    $modalInstance.dismiss('cancel');
+				  };	      	
+	      }],
+	      size: size,
+	      resolve: {
+	        activity: function () {
+	          return selectedActivity;
+	        }
+	      }
+	    });
+	
+	    modalInstance.result.then(function (selectedItem) {
+	      $scope.selected = selectedItem;
+	    }, function () {
+	      $log.info('Modal dismissed at: ' + new Date());
+	    });
+	  };
+	  
+	  // Find existing Activity
+		$scope.findOne = function() {
+			$scope.activity = Activities.get({ 
+				activityId: $stateParams.activityId
+			});
+		};
 
 	}
 ]);
@@ -190,6 +227,25 @@ activityApp.controller('ActivitiesCreateController', ['$scope', 'Activities', 'N
 				
 				Notify.sendMsg('NewActivity', {'id': response._id});
 
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+	}
+]);
+
+activityApp.controller('ActivitiesPushController', ['$scope', 'Activities', 'Notify',
+	function($scope, Activities, Notify ) {
+		
+		// Push Entry to Activity
+		this.push = function(pushActivity) {
+			var activity = pushActivity;
+			activity.entries.push({
+				entryText: this.entryText
+			});
+			
+			activity.$update(function() {
+			
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -249,14 +305,6 @@ activityApp.directive('activityList', ['Activities', 'Notify', function(Activiti
 		}
 	};
 }]);
-
-		// // Find existing Activity
-		// $scope.findOne = function() {
-		// 	$scope.activity = Activities.get({ 
-		// 		activityId: $stateParams.activityId
-		// 	});
-		// };
-
 'use strict';
 
 //Activities service used to communicate Activities REST endpoints
