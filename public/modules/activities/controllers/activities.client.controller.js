@@ -114,7 +114,14 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	    }, function () {
 	      $log.info('Modal dismissed at: ' + new Date());
 	    });
-	  };	  
+	  };
+	  
+	  // Find existing Activity
+		$scope.findOne = function() {
+			$scope.activity = Activities.get({ 
+				activityId: $stateParams.activityId
+			});
+		};
 
 	}
 ]);
@@ -214,10 +221,3 @@ activityApp.directive('activityList', ['Activities', 'Notify', function(Activiti
 		}
 	};
 }]);
-
-		// // Find existing Activity
-		// $scope.findOne = function() {
-		// 	$scope.activity = Activities.get({ 
-		// 		activityId: $stateParams.activityId
-		// 	});
-		// };
