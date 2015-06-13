@@ -13,12 +13,37 @@
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
-body {
-	/*background: url("../img/motivation.jpg") no-repeat center center fixed; */
-	background: url("/modules/core/img/motivation.jpg") no-repeat center center fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	background-color: #333333;
+.orange {
+  background-color:#FFC107;
+}
+.orange h1 {
+  color:#FFFFFF;
+  font-family: "papyrus";
+  text-align: center;
+	font-weight:bold;
+}
+.orange h2 {
+  color:#FFECB3;
+  font-family: "papyrus";
+  text-align: center;
+  font-style: italic;
+  font-size: 16px;
+}
+.orange p {
+  color:#FFFFFF;
+  font-family: "arial";
+  font-size: 22px;
+  padding:20px;
+}
+.orange a {
+  text-decoration: underline;
+  color: #FFFFFF;
+  font-size: 18px;
+}
+.orange a:hover {
+    color: #FFECB3;
+}
+
+.bluebg {
+  background-color:blue;
 }
