@@ -18,13 +18,13 @@
 }
 .orange h1 {
   color:#FFFFFF;
-  font-family: "papyrus";
+  font-family: "arial";
   text-align: center;
 	font-weight:bold;
 }
 .orange h2 {
   color:#FFECB3;
-  font-family: "papyrus";
+  font-family: "arial";
   text-align: center;
   font-style: italic;
   font-size: 16px;
@@ -43,7 +43,39 @@
 .orange a:hover {
     color: #FFECB3;
 }
-
-.bluebg {
-  background-color:blue;
+.yellow h3 {
+  color:#474545;
+  font-family:"arial";
+  font-size:24px;
+  padding:20px;
+  text-align: center;
+  font-weight:bold;
+}
+.yellow {
+  background-color:#FFECB3;
+}
+.yellow p {
+  color:#474545;
+  font-family: "arial";
+  font-size: 22px;
+  padding:20px;  
+}
+.green-icon {
+    color: #009688;
+}
+.red-icon {
+    color: #F44336;
+}
+.blue-icon {
+    color: #3F51B5;
+}
+.gray {
+  background-color:#616161;
+}
+.gray a {
+  color: #212121;
+  font-size: 18px;
+}
+.gray a:hover {
+    color: #B6B6B6;
 }
