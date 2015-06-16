@@ -71,9 +71,25 @@ exports.delete = function(req, res) {
 
 /**
  * List of Activities
- */
+
 exports.list = function(req, res) { 
 	Activity.find().sort('-created').populate('user', 'displayName').exec(function(err, activities) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(activities);
+		}
+	});
+};
+ */
+
+/**
+ * List of Activities by User
+ */
+exports.list = function(req, res) { 
+	Activity.find({'user':req.user.id}).sort('-created').populate('user', 'displayName').exec(function(err, activities) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
