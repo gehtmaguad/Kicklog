@@ -22,9 +22,6 @@ var ActivitySchema = new Schema({
 		required: 'Please fill Activity description',
 		trim: true /*Removes Whitespace from Beginning and End from String */
 	},
-	active: {
-		type: Boolean
-	},
 	created: {
 		type: Date,
 		default: Date.now
@@ -49,7 +46,8 @@ var ActivitySchema = new Schema({
 			},
 			entryDuration: {
 				type: Number, 
-				trim: true
+				trim: true,
+				default: 0
 			}			
 		}
 	]

@@ -135,7 +135,6 @@ activityApp.controller('ActivitiesCreateController', ['$scope', 'Activities', 'N
 			var activity = new Activities ({
 				name: this.name,
 				description: this.description,
-				active: this.active
 			});
 
 			// Redirect after save
@@ -160,7 +159,11 @@ activityApp.controller('ActivitiesPushController', ['$scope', 'Activities', 'Not
 
     	$scope.opened = true;
   	};
-
+  	
+		$scope.Date = function(){
+		   return new Date();
+		};
+  
   	$scope.dateOptions = {
   	  formatYear: 'yy',
 	    startingDay: 1

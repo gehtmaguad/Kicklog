@@ -21,33 +21,45 @@
                         <input type="text" data-ng-model="activityPushCtrl.entryText" id="entryText" class="form-control" placeholder="Activity Entry Name" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="input-group input-group-lg">
-                        <input type="date" data-ng-model="activityPushCtrl.entryDatePicker" id="entryDatePicker" class="form-control" datepicker-popup is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
+                <div class="row">  
+                    <div class="col-xs-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>                        
+                            <input type="date" ng-model="activityPushCtrl.entryDatePicker" ng-init="activityPushCtrl.entryDatePicker=Date()" id="entryDatePicker" class="form-control" init-date="initDate" datepicker-popup is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                        </div>
+                    </div>                           
+                    </div>
+                    <div class="col-xs-6">
+                    <div class="form-group">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="basic-addon1">
+                                <i class="text-muted glyphicon glyphicon-time"></i>
+                            </span>                            
+                            <div class="row">
+                                
+                                <div class="col-xs-4">
+                                    <div class="input-group input-group-lg">
+                                        <input type="number" data-ng-model="activityPushCtrl.entryHours" ng-init="activityPushCtrl.entryHours=0" id="entryHours" name="hour" min="0" class="form-control"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="input-group input-group-lg">
+                                        <input type="number" data-ng-model="activityPushCtrl.entryMinutes" ng-init="activityPushCtrl.entryMinutes=0" id="entryMinutes" name="minutes" min="0" class="form-control"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="input-group input-group-lg">    
+                                        <input type="number" data-ng-model="activityPushCtrl.entrySeconds" ng-init="activityPushCtrl.entrySeconds=0" id="entrySeconds" name="seconds" min="0" class="form-control"/> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>  
-                </div>
-        
-                <div class="row">
-                    <div class="form-group col-xs-4">
-                        <div class="input-group input-group-lg">
-                        <input type="number" data-ng-model="activityPushCtrl.entryHours" id="entryHours" name="hour" min="0" class="form-control"/> 
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <div class="input-group input-group-lg">
-                        <input type="number" data-ng-model="activityPushCtrl.entryMinutes" id="entryMinutes" name="minutes" min="0" class="form-control"/> 
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <div class="input-group input-group-lg">
-                        <input type="number" data-ng-model="activityPushCtrl.entrySeconds" id="entrySeconds" name="seconds" min="0" class="form-control"/> 
-                        </div>
-                    </div>            
-                </div>                
-                
+                    </div>    
+                </div>  
                 </fieldset>
             </form>
     </div>
