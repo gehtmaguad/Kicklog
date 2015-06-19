@@ -42,7 +42,15 @@ var ActivitySchema = new Schema({
 			entryDate: {
 				type: Date,
 				default: Date.now()
-			}
+			}, 
+			entryDatePicker: {
+				type: Date,
+				default: Date.now()
+			},
+			entryDuration: {
+				type: Number, 
+				trim: true
+			}			
 		}
 	]
 });

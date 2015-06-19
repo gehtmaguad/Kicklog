@@ -21,7 +21,7 @@
     <div class="login-from-bg">
       <div>
           <div data-ng-repeat="entry in activity.entries | filter:searchEntryText">
-            <p><span data-ng-bind="entry.entryDate | date:'mediumDate'"></span>:&nbsp;&nbsp;{{entry.entryText}}</p>
+            <p><span data-ng-bind="entry.entryDate | date:'mediumDate'"></span> <span data-ng-bind="entry.entryDatePicker | date:'mediumDate'"></span>:&nbsp;&nbsp;{{entry.entryText}} {{entry.entryDuration}}</p>
           </div>
           <div data-ng-hide="activity.entries.length">
 	          No Entry yet, why don't you create one?

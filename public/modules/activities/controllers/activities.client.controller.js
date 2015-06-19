@@ -153,6 +153,7 @@ activityApp.controller('ActivitiesCreateController', ['$scope', 'Activities', 'N
 activityApp.controller('ActivitiesPushController', ['$scope', 'Activities', 'Notify',
 	function($scope, Activities, Notify ) {
 		
+		/* Date Picker */
   	$scope.open = function($event) {
     	$event.preventDefault();
     	$event.stopPropagation();
@@ -188,7 +189,9 @@ activityApp.controller('ActivitiesPushController', ['$scope', 'Activities', 'Not
 		this.push = function(pushActivity) {
 			var activity = pushActivity;
 			activity.entries.push({
-				entryText: this.entryText
+				entryText: this.entryText,
+				entryDatePicker: this.entryDatePicker,
+				entryDuration: ( this.entryHours * 60 * 60 ) + ( this.entryMinutes * 60 ) + this.entrySeconds
 			});
 			
 			activity.$update(function() {
