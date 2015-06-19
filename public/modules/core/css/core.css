@@ -43,6 +43,9 @@
 .orange a:hover {
     color: #FFECB3;
 }
+.yellow {
+  background-color:#FFECB3;
+}
 .yellow h3 {
   color:#474545;
   font-family:"arial";
@@ -50,9 +53,6 @@
   padding:20px;
   text-align: center;
   font-weight:bold;
-}
-.yellow {
-  background-color:#FFECB3;
 }
 .yellow p {
   color:#474545;

@@ -1,32 +1,40 @@
 <section data-ng-controller="ActivitiesController as activitiesCtrl" data-ng-init="findOne()">
-    </br>
-    </br>
-    <div class="row">
-      <div class="col-xs-12 col-sm-8">
-        <div class="input-group input-group-lg">
-          <input type="text" class="form-control" placeholder="Search for..." ng-model="searchEntryText">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
-          </span>
-        </div><!-- /input-group -->
-      </div>
-      <div class="col-xs-12 col-sm-4 text-center">
-          <button type="button" class="btn btn-primary text-center" ng-click="activitiesCtrl.modalPush('lg', activity)">
-            <i class="glyphicon glyphicon-cog"></i> </br>
-            New Entry
-          </button>
-      </div>
-    </div>
-    </br>
-    <div class="login-from-bg">
-      <div>
-          <div data-ng-repeat="entry in activity.entries | filter:searchEntryText">
-            <p><span data-ng-bind="entry.entryDate | date:'mediumDate'"></span> <span data-ng-bind="entry.entryDatePicker | date:'mediumDate'"></span>:&nbsp;&nbsp;{{entry.entryText}} {{entry.entryDuration}}</p>
-          </div>
-          <div data-ng-hide="activity.entries.length">
-	          No Entry yet, why don't you create one?
-          </div>
-      </div>
-    </div>
-    </br>
+		</br>
+		</br>
+		<div class="row">
+			<div class="col-xs-12 col-sm-8">
+				<div class="input-group input-group-lg">
+					<input type="text" class="form-control" placeholder="Search for..." ng-model="searchEntryText">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button">Go!</button>
+					</span>
+				</div><!-- /input-group -->
+			</div>
+			<div class="col-xs-12 col-sm-4 text-center">
+					<button type="button" class="btn btn-primary text-center" ng-click="activitiesCtrl.modalPush('lg', activity)">
+						<i class="glyphicon glyphicon-cog"></i> </br>
+						New Entry
+					</button>
+			</div>
+		</div>
+		</br>
+		<div class="list-group">
+			<div class="col-xs-12 adding-vertical-space-5" data-ng-repeat="entry in activity.entries | filter:searchEntryText | orderBy:'entryDatePicker':true">
+				<div class="list-group-item yellow">
+					<div class="row">
+						<div class="col-sm-3">
+							<p style="font-size: 12px;padding:5px;">Date: <span data-ng-bind="entry.entryDatePicker | date:'mediumDate'"></span></br></p>
+							<p style="font-size: 12px;padding:5px; ">Duration: {{entry.entryDuration / 60 / 60 | number:0}}h {{entry.entryDuration / 60 % 60 | number:0}}min {{entry.entryDuration % 60 % 60 | number:0}}sec</p>
+						</div>
+						<div class="col-sm-9">
+							<p style="overflow:hidden;">{{entry.entryText}} </p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-ng-hide="activity.entries.length">
+				No Entry yet, why don't you create one?
+			</div>
+		</div>
+		</br>
 </section>
