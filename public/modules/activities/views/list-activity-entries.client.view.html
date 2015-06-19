@@ -11,7 +11,7 @@
 				</div><!-- /input-group -->
 			</div>
 			<div class="col-xs-12 col-sm-4 text-center">
-					<button type="button" class="btn btn-primary text-center" ng-click="activitiesCtrl.modalPush('lg', activity)">
+					<button type="button" class="btn btn-warning text-center" ng-click="activitiesCtrl.modalPush('lg', activity)">
 						<i class="glyphicon glyphicon-cog"></i> </br>
 						New Entry
 					</button>
@@ -20,7 +20,7 @@
 		</br>
 		<div class="list-group">
 			<div class="col-xs-12 adding-vertical-space-5" data-ng-repeat="entry in activity.entries | filter:searchEntryText | orderBy:'entryDatePicker':true">
-				<div class="list-group-item yellow">
+				<div class="list-group-item activitybox">
 					<div class="row">
 						<div class="col-sm-3">
 							<p style="font-size: 12px;padding:5px;">Date: <span data-ng-bind="entry.entryDatePicker | date:'mediumDate'"></span></br></p>

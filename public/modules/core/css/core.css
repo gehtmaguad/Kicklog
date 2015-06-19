@@ -80,6 +80,34 @@
     color: #B6B6B6;
 }
 
+.activitybox {
+  background-color:#616161;
+}
+.activitybox p {
+  color:#FFFFFF;
+}
+.activitybox a {
+  color: #000000;
+  font-size: 18px;
+}
+.activitybox a:hover {
+    color: #000000;
+}
+#activityboxTitle {
+	  color:#FFFFFF;
+	  text-align:center;
+	  font-size: 30px;
+	  padding:10px;
+}
+.activitybox:hover #activityboxTitle{
+	  color:#383838;
+}
+#activityboxDesc {
+	  color:#B6B6B6;
+	  text-align:center;
+	  padding:10px;
+}
+
 /* animate circles with hover effects */
 
 .ch-grid {
