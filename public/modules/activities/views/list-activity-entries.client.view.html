@@ -18,23 +18,28 @@
 			</div>
 		</div>
 		</br>
-		<div class="list-group">
-			<div class="col-xs-12 adding-vertical-space-5" data-ng-repeat="entry in activity.entries | filter:searchEntryText | orderBy:'entryDatePicker':true">
-				<div class="list-group-item activitybox">
-					<div class="row">
-						<div class="col-sm-3">
-							<p style="font-size: 12px;padding:5px;">Date: <span data-ng-bind="entry.entryDatePicker | date:'mediumDate'"></span></br></p>
-							<p style="font-size: 12px;padding:5px; ">Duration: {{entry.entryDuration / 60 / 60 | number:0}}h {{entry.entryDuration / 60 % 60 | number:0}}min {{entry.entryDuration % 60 % 60 | number:0}}sec</p>
-						</div>
-						<div class="col-sm-9">
-							<p style="overflow:hidden;">{{entry.entryText}} </p>
+    	<tabset justified="true">
+      		<tab heading="Entries">
+				<div class="list-group">
+					<div class="col-xs-12 adding-vertical-space-5" data-ng-repeat="entry in activity.entries | filter:searchEntryText | orderBy:'entryDatePicker':true">
+						<div class="list-group-item activitybox">
+							<div class="row">
+								<div class="col-sm-3">
+									<p style="font-size: 12px;padding:5px;">Date: <span data-ng-bind="entry.entryDatePicker | date:'mediumDate'"></span></br></p>
+									<p style="font-size: 12px;padding:5px; ">Duration: {{entry.entryDuration / 60 / 60 | number:0}}h {{entry.entryDuration / 60 % 60 | number:0}}min {{entry.entryDuration % 60 % 60 | number:0}}sec</p>
+								</div>
+								<div class="col-sm-9">
+									<p style="overflow:hidden;">{{entry.entryText}} </p>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div data-ng-hide="activity.entries.length">
-				No Entry yet, why don't you create one?
-			</div>
-		</div>
+					<div data-ng-hide="activity.entries.length">
+						No Entry yet, why don't you create one?
+					</div>
+				</div>      			
+        	</tab>
+      		<tab heading="Stats">Stats missing ...</tab>
+    	</tabset>		
 		</br>
 </section>
