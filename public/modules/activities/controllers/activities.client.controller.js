@@ -122,6 +122,13 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 				activityId: $stateParams.activityId
 			});
 		};
+		
+		// HeatMap 
+		$scope.heatMapConfig = {
+			id:'cal-heatmap',
+			range:5,
+			data:{1434798693:9,1434657600:5}
+		};
 
 	}
 ]);
