@@ -29,7 +29,8 @@ module.exports = {
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/d3/d3.js',
 				'public/lib/cal-heatmap/cal-heatmap.js',
-				'public/lib/angular-cal-heatmap-directive/dist/1.3.0/calHeatmap.min.js'
+				'public/lib/angular-cal-heatmap-directive/app/scripts/calHeatmap.js'
+				//'public/lib/angular-cal-heatmap-directive/dist/1.3.0/calHeatmap.min.js'
 			]
 		},
 		css: [
