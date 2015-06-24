@@ -15,6 +15,7 @@ module.exports = {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+				'public/lib/nvd3/nv.d3.css',
 				'public/lib/cal-heatmap/cal-heatmap.css'
 			],
 			js: [
@@ -28,6 +29,8 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/d3/d3.js',
+				'public/lib/nvd3/nv.d3.js',
+				'public/lib/angular-nvd3/dist/angular-nvd3.js',
 				'public/lib/cal-heatmap/cal-heatmap.js',
 				'public/lib/angular-cal-heatmap-directive/app/scripts/calHeatmap.js'
 				//'public/lib/angular-cal-heatmap-directive/dist/1.3.0/calHeatmap.min.js'
