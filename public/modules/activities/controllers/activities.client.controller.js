@@ -116,22 +116,32 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	    });
 	  };
 	  
+	  // Heat Map Data Object
+	  $scope.heatMapDataObject = {};
+
 	  // Find existing Activity
 		$scope.findOne = function() {
 			$scope.activity = Activities.get({ 
 				activityId: $stateParams.activityId
 			});
+			
+			// Heat Map Data Object Callback Function
+			$scope.activity.$promise.then(function(data) {
+				for(var j in data.entries) {
+					var timestamp = Date.parse(data.entries[j].entryDatePicker)/1000;
+					$scope.heatMapDataObject[timestamp] = 1;
+				}				
+			});			
 		};
 
-		// Create CalHeatMap Data Object
-		//$scope.heatMapDataObject2 = {"1433887200":1,"1433196000":1,"1433109600":1,"1434751200":1,"1433282400":1,"1433259831":1,"1433173562":1};
-		$scope.heatMapDataObject = {};
+		// Heat Map Data Summary Object 
+		$scope.heatMapDataObjectSummary = {};
 		Activities.query(function(arr) {
 			var i;
 			for (i = 0; i < arr.length; i++) { 
 				for(var j in arr[i].entries) {
 					var timestamp = Date.parse(arr[i].entries[j].entryDatePicker)/1000;
-					$scope.heatMapDataObject[timestamp] = 1;
+					$scope.heatMapDataObjectSummary[timestamp] = 1;
 				}
 			}
 		});
