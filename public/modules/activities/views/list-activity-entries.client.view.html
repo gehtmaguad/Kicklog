@@ -33,6 +33,7 @@
 		      						<p style="font-size: 16px;padding:5px; ">Duration: {{entry.entryDuration * 1000 | millSecondsToTimeString  }}</p>
 		      						<p style="font-size: 16px;padding:5px; word-break: break-all; ">Description: {{entry.entryDescription}}</p>
 		      					</div>
+		      					<button style="float: right;" ng-click="activitiesCtrl.modalPushUpdate('lg', entry, activity)" class="btn btn-default" >Edit</button>
 		    					</accordion-group>
 						</accordion>
         	</tab>

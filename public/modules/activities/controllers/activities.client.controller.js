@@ -130,6 +130,48 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	    });
 	  };
 	  
+		// Open a modal window to Update an Activity Entry Record
+		this.modalPushUpdate = function (size, selectedEntry, selectedActivity) {
+
+	    var modalInstance = $modal.open({
+	      templateUrl: 'modules/activities/views/edit-activity-entry.client.view.html',
+	      controller: function ($scope, $modalInstance, entry, activity) {
+	      	$scope.entry = entry;
+	      	$scope.activity = activity;
+	      	
+				  $scope.ok = function () {
+				  	
+				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// if (updateActivityForm.$valid) {
+				    // 	$modalInstance.close($scope.activity);
+				  	// }
+				  	$modalInstance.close($scope.entry);
+				  	$modalInstance.close($scope.activity);
+				  	
+				  };
+				
+				  $scope.cancel = function () {
+				    $modalInstance.dismiss('cancel');
+				  };	      	
+	      },
+	      size: size,
+	      resolve: {
+	        entry: function () {
+	          return selectedEntry;
+	        },
+	        activity: function() {
+	          return selectedActivity;
+	        }
+	      }
+	    });
+	
+	    modalInstance.result.then(function (selectedItem) {
+	      $scope.selected = selectedItem;
+	    }, function () {
+	      $log.info('Modal dismissed at: ' + new Date());
+	    });
+	  };	  
+	  
 	  // Heat Map Data Object
 	  $scope.heatMapDataObject = {};
 
@@ -298,40 +340,40 @@ activityApp.controller('ActivitiesPushController', ['$scope', 'Activities', 'Not
 	function($scope, Activities, Notify ) {
 		
 		/* Date Picker */
-  	$scope.open = function($event) {
-    	$event.preventDefault();
-    	$event.stopPropagation();
-
-    	$scope.opened = true;
-  	};
-  	
-		$scope.Date = function(){
-		   return new Date();
-		};
-  
-  	$scope.dateOptions = {
-  	  formatYear: 'yy',
-	    startingDay: 1
-  	};
-
-  	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  	$scope.format = $scope.formats[0];
-
-  	var tomorrow = new Date();
-  	tomorrow.setDate(tomorrow.getDate() + 1);
-  	var afterTomorrow = new Date();
-  	afterTomorrow.setDate(tomorrow.getDate() + 2);
-  	$scope.events =
-    	[
-      	{
-	        date: tomorrow,
-        	status: 'full'
-      	},
-      	{
-	        date: afterTomorrow,
-        	status: 'partially'
-      	}
-    	];		
+		  $scope.open = function($event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+		
+			$scope.opened = true;
+		  };
+		  
+			$scope.Date = function(){
+			   return new Date();
+			};
+		
+		  $scope.dateOptions = {
+		    formatYear: 'yy',
+		    startingDay: 1
+		  };
+		
+		  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		  $scope.format = $scope.formats[0];
+		
+		  var tomorrow = new Date();
+		  tomorrow.setDate(tomorrow.getDate() + 1);
+		  var afterTomorrow = new Date();
+		  afterTomorrow.setDate(tomorrow.getDate() + 2);
+		  $scope.events =
+			[
+		  	{
+		        date: tomorrow,
+		    	status: 'full'
+		  	},
+		  	{
+		        date: afterTomorrow,
+		    	status: 'partially'
+		  	}
+			];		
 		
 		// Push Entry to Activity
 		this.push = function(pushActivity) {
@@ -349,6 +391,47 @@ activityApp.controller('ActivitiesPushController', ['$scope', 'Activities', 'Not
 				$scope.error = errorResponse.data.message;
 			});
 		};
+	}
+]);
+
+activityApp.controller('ActivitiesPushUpdateController', ['$scope','Activities', 'Notify',
+	function($scope, Activities, Notify) {
+		
+		// Update Entry from Activity (Delete old one and create new one)
+		this.update = function(pullEntry, pullActivity) {
+			var entry = pullEntry;
+			var activity = pullActivity;
+
+			activity.entries = activity.entries.filter(function (el) { return el._id !== entry._id;});
+			
+			activity.entries.push({
+				entryText: entry.entryText,
+				entryDatePicker: entry.entryDatePicker,
+				entryDuration: ( entry.entryHours * 60 * 60 ) + ( entry.entryMinutes * 60 ) + entry.entrySeconds,
+				entryDescription: entry.entryDescription
+			});			
+			
+			activity.$update(function() {
+			
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};		
+		
+		// Pull Entry from Activity
+		this.pull = function(pullEntry, pullActivity) {
+			var entry = pullEntry;
+			var activity = pullActivity;
+
+			activity.entries = activity.entries.filter(function (el) { return el._id !== entry._id;});
+			
+			activity.$update(function() {
+			
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+		
 	}
 ]);
 
