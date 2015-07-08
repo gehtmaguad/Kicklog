@@ -64,19 +64,19 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	      controller: function ($scope, $modalInstance, activity) {
 	      	$scope.activity = activity;
 	      	
-				  $scope.ok = function () {
+			$scope.ok = function () {
 				  	
-				  	// BUGFIX: Not working, Modal can not be closed when ok
-				  	// if (updateActivityForm.$valid) {
-				    // 	$modalInstance.close($scope.activity);
-				  	// }
-				  	$modalInstance.close($scope.activity);
-				  	
-				  };
-				
-				  $scope.cancel = function () {
-				    $modalInstance.dismiss('cancel');
-				  };	      	
+			  	// BUGFIX: Not working, Modal can not be closed when ok
+			  	// if (updateActivityForm.$valid) {
+			    // 	$modalInstance.close($scope.activity);
+			  	// }
+			  	$modalInstance.close($scope.activity);
+			  	
+			};
+			
+			$scope.cancel = function () {
+			    $modalInstance.dismiss('cancel');
+			};	      	
 	      },
 	      size: size,
 	      resolve: {
@@ -93,7 +93,7 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	    });
 	  };
 	  
-		// Open a modal window to Update a Activity Record
+		// Open a modal window to Add an Activity Entry Record
 		this.modalPush = function (size, selectedActivity) {
 
 	    var modalInstance = $modal.open({
