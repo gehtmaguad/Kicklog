@@ -26,7 +26,7 @@
 							<div class="row">
 								<div class="col-sm-3">
 									<p style="font-size: 12px;padding:5px;">Date: <span data-ng-bind="entry.entryDatePicker | date:'mediumDate'"></span></br></p>
-									<p style="font-size: 12px;padding:5px; ">Duration: {{entry.entryDuration / 60 / 60 | number:0}}h {{entry.entryDuration / 60 % 60 | number:0}}min {{entry.entryDuration % 60 % 60 | number:0}}sec</p>
+									<p style="font-size: 12px;padding:5px; ">Duration: {{entry.entryDuration * 1000 | millSecondsToTimeString  }}</p>
 								</div>
 								<div class="col-sm-9">
 									<p style="overflow:hidden;">{{entry.entryText}} </p>
