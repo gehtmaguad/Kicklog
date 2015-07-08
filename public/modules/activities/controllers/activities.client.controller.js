@@ -339,7 +339,8 @@ activityApp.controller('ActivitiesPushController', ['$scope', 'Activities', 'Not
 			activity.entries.push({
 				entryText: this.entryText,
 				entryDatePicker: this.entryDatePicker,
-				entryDuration: ( this.entryHours * 60 * 60 ) + ( this.entryMinutes * 60 ) + this.entrySeconds
+				entryDuration: ( this.entryHours * 60 * 60 ) + ( this.entryMinutes * 60 ) + this.entrySeconds,
+				entryDescription: this.entryDescription
 			});
 			
 			activity.$update(function() {

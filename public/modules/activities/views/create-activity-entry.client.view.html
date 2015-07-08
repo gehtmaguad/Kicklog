@@ -18,7 +18,7 @@
                         <span class="input-group-addon" id="basic-addon1">
                             <i class="text-muted glyphicon glyphicon-flag"></i>
                         </span>
-                        <input type="text" data-ng-model="activityPushCtrl.entryText" id="entryText" class="form-control" placeholder="Activity Entry Name" required>
+                        <input type="text" ng-maxlength="25" data-ng-model="activityPushCtrl.entryText" id="entryText" class="form-control" placeholder="Activity Entry Name" required/>
                     </div>
                 </div>
                 <div class="row">  
@@ -60,6 +60,12 @@
                     </div>  
                     </div>    
                 </div>  
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="basic-addon1">
+                        <i class="text-muted glyphicon glyphicon-pencil"></i>
+                    </span>
+                    <textarea style="resize: vertical;" data-ng-model="activityPushCtrl.entryDescription" id="entryDescription" class="form-control" placeholder="Activity Entry Description"></textarea>
+                </div>                
                 </fieldset>
             </form>
     </div>

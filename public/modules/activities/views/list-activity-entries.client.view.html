@@ -20,34 +20,27 @@
 		</br>
     	<tabset justified="true">
       		<tab heading="Entries">
-				<div class="list-group">
-					<div class="col-xs-12 adding-vertical-space-5" data-ng-repeat="entry in activity.entries | filter:searchEntryText | orderBy:'entryDatePicker':true">
-						<div class="list-group-item activitybox">
-							<div class="row">
-								<div class="col-sm-3">
-									<p style="font-size: 12px;padding:5px;">Date: <span data-ng-bind="entry.entryDatePicker | date:'mediumDate'"></span></br></p>
-									<p style="font-size: 12px;padding:5px; ">Duration: {{entry.entryDuration * 1000 | millSecondsToTimeString  }}</p>
-								</div>
-								<div class="col-sm-9">
-									<p style="overflow:hidden;">{{entry.entryText}} </p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div data-ng-hide="activity.entries.length">
-						No Entry yet, why don't you create one?
-					</div>
-				</div>      			
+						</br>
+						<accordion close-others="oneAtATime">
+							    <accordion-group is-open="status.open" ng-repeat="entry in activity.entries | filter:searchEntryText | orderBy:'entryDatePicker':true">
+							    	<accordion-heading> 
+							    		<div style="white-space: nowrap; overflow: hidden;">
+							    			{{entry.entryDatePicker | date:'yyyy-MM-dd'}}: {{entry.entryText}}
+							    			<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+							    		</div>
+										</accordion-heading>
+										<div>
+		      						<p style="font-size: 16px;padding:5px; ">Duration: {{entry.entryDuration * 1000 | millSecondsToTimeString  }}</p>
+		      						<p style="font-size: 16px;padding:5px; word-break: break-all; ">Description: {{entry.entryDescription}}</p>
+		      					</div>
+		    					</accordion-group>
+						</accordion>
         	</tab>
       		<tab heading="Stats">
       			</br>
       			<p>Calendar Heatmap</p>
       			<cal-heatmap config="{data:heatMapDataObject}"></cal-heatmap>
-      			
-
-<nvd3 options="options" data="data"></nvd3>
-
-
+						<!--<nvd3 options="options" data="data"></nvd3>-->
       		</tab>   
     	</tabset>		
 		</br>
