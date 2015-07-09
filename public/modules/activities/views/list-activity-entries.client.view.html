@@ -40,8 +40,20 @@
       		<tab heading="Stats">
       			</br>
       			<p>Calendar Heatmap</p>
-      			<cal-heatmap config="{data:heatMapDataObject}"></cal-heatmap>
+      			<div class="visible-lg">
+      				<cal-heatmap config="{data:heatMapDataObject,domain:'year',range : 1,cellSize:19}"></cal-heatmap>
+      			</div>
+						<div class="visible-md">
+      				<cal-heatmap config="{data:heatMapDataObject,domain:'year',range : 1,cellSize:15}"></cal-heatmap>
+      			</div>			
+      			<div class="visible-sm">
+      				<cal-heatmap config="{data:heatMapDataObject,domain:'month',subDomain : 'day',range : 5, cellSize:22, start:heatMapMonthStartSmDevice}"></cal-heatmap>
+      			</div>
+      			<div class="visible-xs">
+      				<cal-heatmap config="{data:heatMapDataObject,domain:'month',subDomain : 'day',range : 3, cellSize:22, start:heatMapMonthStartXsDevice}"></cal-heatmap>
+      			</div>      			
 						<!--<nvd3 options="options" data="data"></nvd3>-->
+						
       		</tab>   
     	</tabset>		
 		</br>

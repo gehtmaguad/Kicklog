@@ -173,6 +173,14 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	  };	  
 	  
 	  // Heat Map Data Object
+	  var heatMapMonthStartSmDevice = new Date();
+	  heatMapMonthStartSmDevice.setMonth(heatMapMonthStartSmDevice.getMonth()-4);
+	  $scope.heatMapMonthStartSmDevice = heatMapMonthStartSmDevice;
+	  
+	  var heatMapMonthStartXsDevice = new Date();
+	  heatMapMonthStartXsDevice.setMonth(heatMapMonthStartXsDevice.getMonth()-2);
+	  $scope.heatMapMonthStartXsDevice = heatMapMonthStartXsDevice;
+	  
 	  $scope.heatMapDataObject = {};
 
 	  // Find existing Activity
