@@ -37,7 +37,7 @@
 		    					</accordion-group>
 						</accordion>
         	</tab>
-      		<tab heading="Stats">
+      		<tab heading="Stats" select="refreshCharts()">
       			</br>
       			<p>Calendar Heatmap</p>
       			<div class="visible-lg">
@@ -51,9 +51,12 @@
       			</div>
       			<div class="visible-xs">
       				<cal-heatmap config="{data:heatMapDataObject,domain:'month',subDomain : 'day',range : 3, cellSize:22, start:heatMapMonthStartXsDevice}"></cal-heatmap>
-      			</div>      			
-						<!--<nvd3 options="options" data="data"></nvd3>-->
-						
+      			</div> 
+      			</br>
+      			<p>Bar Chart</p>
+      			<div>
+							<nvd3 options="options" data="data"></nvd3>
+						</div>  
       		</tab>   
     	</tabset>		
 		</br>
