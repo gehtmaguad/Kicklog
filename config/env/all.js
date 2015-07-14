@@ -33,7 +33,6 @@ module.exports = {
 				'public/lib/angular-nvd3/dist/angular-nvd3.js',
 				'public/lib/cal-heatmap/cal-heatmap.js',
 				'public/lib/angular-cal-heatmap-directive/app/scripts/calHeatmap.js'
-				//'public/lib/angular-cal-heatmap-directive/dist/1.3.0/calHeatmap.min.js'
 			]
 		},
 		css: [
