@@ -32,7 +32,7 @@ module.exports = {
 				'public/lib/nvd3/nv.d3.js',
 				'public/lib/angular-nvd3/dist/angular-nvd3.js',
 				'public/lib/cal-heatmap/cal-heatmap.js',
-				'public/lib/angular-cal-heatmap-directive/app/scripts/calHeatmap.js'
+				'public/lib/angular-cal-heatmap-directive-async/app/scripts/calHeatmap.js'
 			]
 		},
 		css: [
