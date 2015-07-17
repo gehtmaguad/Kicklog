@@ -24,7 +24,7 @@ module.exports = {
 				'public/lib/nvd3/nv.d3.min.js',
 				'public/lib/angular-nvd3/dist/angular-nvd3.min.js',
 				'public/lib/cal-heatmap/cal-heatmap.min.js',
-				'public/lib/angular-cal-heatmap-directive-async/app/scripts/calHeatmap.js'
+				'public/lib/angular-cal-heatmap-directive-async/dist/1.4.0/calHeatmap.min.js'
 			]
 		},
 		css: 'public/dist/application.min.css',
