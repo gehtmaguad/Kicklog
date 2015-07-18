@@ -84,25 +84,174 @@ angular.module('activities').config(['$stateProvider',
 ]);
 'use strict';
 
+angular.module('activities').controller('ActivitiesCreateController', ['$scope', 'Activities', 'Notify',
+	function($scope, Activities, Notify ) {
+		
+		// Create new Activity
+		this.create = function() {
+			// Create new Activity object
+			var activity = new Activities ({
+				name: this.name,
+				description: this.description,
+			});
+
+			// Redirect after save
+			activity.$save(function(response) {
+				
+				Notify.sendMsg('NewActivity', {'id': response._id});
+
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+	}
+]);
+'use strict';
+
+angular.module('activities').controller('ActivitiesPushUpdateController', ['$scope','Activities', 'Notify',
+	function($scope, Activities, Notify) {
+		
+		// Update Entry from Activity (Delete old one and create new one)
+		this.update = function(pullEntry, pullActivity) {
+			var entry = pullEntry;
+			var activity = pullActivity;
+
+			activity.entries = activity.entries.filter(function (el) { return el._id !== entry._id;});
+			
+			activity.entries.push({
+				entryText: entry.entryText,
+				entryDatePicker: entry.entryDatePicker,
+				entryDuration: ( entry.entryHours * 60 * 60 ) + ( entry.entryMinutes * 60 ) + entry.entrySeconds,
+				entryDescription: entry.entryDescription
+			});			
+			
+			activity.$update(function() {
+			
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};		
+		
+		// Pull Entry from Activity
+		this.pull = function(pullEntry, pullActivity) {
+			var entry = pullEntry;
+			var activity = pullActivity;
+
+			activity.entries = activity.entries.filter(function (el) { return el._id !== entry._id;});
+			
+			activity.$update(function() {
+			
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+		
+	}
+]);
+'use strict';
+
+angular.module('activities').controller('ActivitiesPushController', ['$scope', 'Activities', 'Notify',
+	function($scope, Activities, Notify ) {
+		
+		/* Date Picker */
+		  $scope.open = function($event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+		
+			$scope.opened = true;
+		  };
+		  
+			$scope.Date = function(){
+			   return new Date();
+			};
+		
+		  $scope.dateOptions = {
+		    formatYear: 'yy',
+		    startingDay: 1
+		  };
+		
+		  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		  $scope.format = $scope.formats[0];
+		
+		  var tomorrow = new Date();
+		  tomorrow.setDate(tomorrow.getDate() + 1);
+		  var afterTomorrow = new Date();
+		  afterTomorrow.setDate(tomorrow.getDate() + 2);
+		  $scope.events =
+			[
+		  	{
+		        date: tomorrow,
+		    	status: 'full'
+		  	},
+		  	{
+		        date: afterTomorrow,
+		    	status: 'partially'
+		  	}
+			];		
+		
+		// Push Entry to Activity
+		this.push = function(pushActivity) {
+			var activity = pushActivity;
+			activity.entries.push({
+				entryText: this.entryText,
+				entryDatePicker: this.entryDatePicker,
+				entryDuration: ( this.entryHours * 60 * 60 ) + ( this.entryMinutes * 60 ) + this.entrySeconds,
+				entryDescription: this.entryDescription
+			});
+			
+			activity.$update(function() {
+			
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+	}
+]);
+'use strict';
+
+angular.module('activities').controller('ActivitiesUpdateController', ['$scope','Activities', 'Notify',
+	function($scope, Activities, Notify) {
+		
+		// Update existing Activity
+		this.update = function(updatedActivity) {
+			var activity = updatedActivity;
+
+			activity.$update(function() {
+
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+		
+		// Remove existing Activity
+		this.remove = function(deleteActivity) {
+			var activity = deleteActivity;
+			
+			if ( activity ) { 
+				activity.$remove(function(response){
+					Notify.sendMsg('NewActivity', {'id': response._id});
+				});
+
+				for (var i in this.activities) {
+					if (this.activities [i] === activity) {
+						this.activities.splice(i, 1);
+					}
+				}
+			} else {
+				this.activity.$remove(function() {
+				});
+			}
+		};		
+		
+	}
+]);
+'use strict';
+
 // Activities controller
 
 var activityApp = angular.module('activities');
 
-activityApp.filter('millSecondsToTimeString', function() {
-  return function(millseconds) {
-    var seconds = Math.floor(millseconds / 1000);
-    var days = Math.floor(seconds / 86400);
-    var hours = Math.floor((seconds % 86400) / 3600);
-    var minutes = Math.floor(((seconds % 86400) % 3600) / 60);
-    var timeString = '';
-    if(days > 0) timeString += (days > 1) ? (days + ' days ') : (days + ' day ');
-    if(hours > 0) timeString += (hours > 1) ? (hours + ' hours ') : (hours + ' hour ');
-    if(minutes >= 0) timeString += (minutes > 1) ? (minutes + ' minutes ') : (minutes + ' minute ');
-    return timeString;
-};
-});
-
-activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authentication', 'Activities', '$modal', '$log',
+angular.module('activities').controller('ActivitiesController', ['$scope', '$stateParams', 'Authentication', 'Activities', '$modal', '$log',
 	function($scope, $stateParams, Authentication, Activities, $modal, $log) {
 		
 		this.authentication = Authentication;
@@ -345,165 +494,6 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	}
 ]);
 
-activityApp.controller('ActivitiesCreateController', ['$scope', 'Activities', 'Notify',
-	function($scope, Activities, Notify ) {
-		
-		// Create new Activity
-		this.create = function() {
-			// Create new Activity object
-			var activity = new Activities ({
-				name: this.name,
-				description: this.description,
-			});
-
-			// Redirect after save
-			activity.$save(function(response) {
-				
-				Notify.sendMsg('NewActivity', {'id': response._id});
-
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-	}
-]);
-
-activityApp.controller('ActivitiesPushController', ['$scope', 'Activities', 'Notify',
-	function($scope, Activities, Notify ) {
-		
-		/* Date Picker */
-		  $scope.open = function($event) {
-			$event.preventDefault();
-			$event.stopPropagation();
-		
-			$scope.opened = true;
-		  };
-		  
-			$scope.Date = function(){
-			   return new Date();
-			};
-		
-		  $scope.dateOptions = {
-		    formatYear: 'yy',
-		    startingDay: 1
-		  };
-		
-		  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-		  $scope.format = $scope.formats[0];
-		
-		  var tomorrow = new Date();
-		  tomorrow.setDate(tomorrow.getDate() + 1);
-		  var afterTomorrow = new Date();
-		  afterTomorrow.setDate(tomorrow.getDate() + 2);
-		  $scope.events =
-			[
-		  	{
-		        date: tomorrow,
-		    	status: 'full'
-		  	},
-		  	{
-		        date: afterTomorrow,
-		    	status: 'partially'
-		  	}
-			];		
-		
-		// Push Entry to Activity
-		this.push = function(pushActivity) {
-			var activity = pushActivity;
-			activity.entries.push({
-				entryText: this.entryText,
-				entryDatePicker: this.entryDatePicker,
-				entryDuration: ( this.entryHours * 60 * 60 ) + ( this.entryMinutes * 60 ) + this.entrySeconds,
-				entryDescription: this.entryDescription
-			});
-			
-			activity.$update(function() {
-			
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-	}
-]);
-
-activityApp.controller('ActivitiesPushUpdateController', ['$scope','Activities', 'Notify',
-	function($scope, Activities, Notify) {
-		
-		// Update Entry from Activity (Delete old one and create new one)
-		this.update = function(pullEntry, pullActivity) {
-			var entry = pullEntry;
-			var activity = pullActivity;
-
-			activity.entries = activity.entries.filter(function (el) { return el._id !== entry._id;});
-			
-			activity.entries.push({
-				entryText: entry.entryText,
-				entryDatePicker: entry.entryDatePicker,
-				entryDuration: ( entry.entryHours * 60 * 60 ) + ( entry.entryMinutes * 60 ) + entry.entrySeconds,
-				entryDescription: entry.entryDescription
-			});			
-			
-			activity.$update(function() {
-			
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};		
-		
-		// Pull Entry from Activity
-		this.pull = function(pullEntry, pullActivity) {
-			var entry = pullEntry;
-			var activity = pullActivity;
-
-			activity.entries = activity.entries.filter(function (el) { return el._id !== entry._id;});
-			
-			activity.$update(function() {
-			
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-		
-	}
-]);
-
-activityApp.controller('ActivitiesUpdateController', ['$scope','Activities', 'Notify',
-	function($scope, Activities, Notify) {
-		
-		// Update existing Activity
-		this.update = function(updatedActivity) {
-			var activity = updatedActivity;
-
-			activity.$update(function() {
-
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-		
-		// Remove existing Activity
-		this.remove = function(deleteActivity) {
-			var activity = deleteActivity;
-			
-			if ( activity ) { 
-				activity.$remove(function(response){
-					Notify.sendMsg('NewActivity', {'id': response._id});
-				});
-
-				for (var i in this.activities) {
-					if (this.activities [i] === activity) {
-						this.activities.splice(i, 1);
-					}
-				}
-			} else {
-				this.activity.$remove(function() {
-				});
-			}
-		};		
-		
-	}
-]);
-
 activityApp.directive('activityList', ['Activities', 'Notify', function(Activities,Notify) {
 	return {
 		restrict: 'E',
@@ -519,6 +509,41 @@ activityApp.directive('activityList', ['Activities', 'Notify', function(Activiti
 		}
 	};
 }]);
+'use strict';
+
+angular.module('activities').directive('activityList', ['Activities', 'Notify', function(Activities,Notify) {
+	return {
+		restrict: 'E',
+		transclude: true,
+		templateUrl: 'modules/activities/views/activity-list-template.html',
+		link: function(scope, element, attrs) {
+			
+			// when a new activity is added, update the activity list
+			Notify.getMsg('NewActivity', function(event, data) {
+				// Find a list of Activities
+				scope.activitiesCtrl.activities = Activities.query();
+			});
+		}
+	};
+}
+]);
+'use strict';
+
+angular.module('activities').filter('millSecondsToTimeString', [
+	function() {
+		return function(millseconds) {
+	    var seconds = Math.floor(millseconds / 1000);
+	    var days = Math.floor(seconds / 86400);
+	    var hours = Math.floor((seconds % 86400) / 3600);
+	    var minutes = Math.floor(((seconds % 86400) % 3600) / 60);
+	    var timeString = '';
+	    if(days > 0) timeString += (days > 1) ? (days + ' days ') : (days + ' day ');
+	    if(hours > 0) timeString += (hours > 1) ? (hours + ' hours ') : (hours + ' hour ');
+	    if(minutes >= 0) timeString += (minutes > 1) ? (minutes + ' minutes ') : (minutes + ' minute ');
+	    return timeString;
+		};
+	}
+]);
 'use strict';
 
 //Activities service used to communicate Activities REST endpoints
