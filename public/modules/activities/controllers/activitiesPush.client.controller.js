@@ -7,21 +7,19 @@ angular.module('activities').controller('ActivitiesPushController', ['$scope', '
 		  $scope.open = function($event) {
 			$event.preventDefault();
 			$event.stopPropagation();
+			
+    	$scope.format = 'yyyy-MM-dd';			
 		
 			$scope.opened = true;
 		  };
 		  
 			$scope.Date = function(){
-			   return new Date();
+			   return new Date().toISOString().slice(0,10);
 			};
-		
-		  $scope.dateOptions = {
-		    formatYear: 'yy',
-		    startingDay: 1
-		  };
-		
-		  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-		  $scope.format = $scope.formats[0];
+			
+			$scope.dateOptions = {
+    		startingDay: 1
+  		};
 		
 		  var tomorrow = new Date();
 		  tomorrow.setDate(tomorrow.getDate() + 1);

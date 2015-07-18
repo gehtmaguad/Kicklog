@@ -28,7 +28,7 @@
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>                        
-                            <input type="date" ng-model="activityPushCtrl.entryDatePicker" ng-init="activityPushCtrl.entryDatePicker=Date()" id="entryDatePicker" class="form-control" init-date="initDate" datepicker-popup is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                            <input type="text" datepicker-popup="{{format}}" ng-model="activityPushCtrl.entryDatePicker" ng-init="activityPushCtrl.entryDatePicker=Date()" id="entryDatePicker" class="form-control" is-open="opened" ng-required="true" close-text="Close" />
                         </div>
                     </div>                           
                     </div>
