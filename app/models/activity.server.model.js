@@ -51,7 +51,7 @@ var ActivitySchema = new Schema({
 			},
 			entryDescription: {
 				type: String, 
-				default: "empty",
+				default: 'empty',
 				trim: true
 			}			
 		}
