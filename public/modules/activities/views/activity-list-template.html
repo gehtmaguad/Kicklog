@@ -1,13 +1,16 @@
 <div class="list-group">
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 adding-vertical-space" data-ng-repeat="activity in activitiesCtrl.activities | filter:searchText">
-        <a  data-ng-href="#!/activities/{{activity._id}}" class="list-group-item activitybox">
-            <p id="activityboxTitle">{{activity.name}}</p>
-            <p id="activityboxDesc" >{{activity.description}}</p>
-        </a>
-        <div class="btn-group btn-group-justified">
-            <div class="btn-group">
-                <button ng-click="activitiesCtrl.modalUpdate('lg', activity)" class="btn btn-default" >Edit</button>
-            </div>
+        <div ng-style="{ 'background' : activity.color }" class="activitybox">
+            <a  data-ng-href="#!/activities/{{activity._id}}">
+                <div>
+                    <p id="activityboxTitle">{{activity.name}}</p>
+                    <p id="activityboxDesc" >{{activity.description}}</p>
+                </div>
+            </a>
+            <hr style="padding-left:20px;">
+            <a ng-click="activitiesCtrl.modalUpdate('lg', activity)">
+                <p id="activityboxLink">Edit</p>
+            </a>
         </div>
     </div>
 </div>

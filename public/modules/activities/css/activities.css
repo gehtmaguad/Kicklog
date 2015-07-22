@@ -6,3 +6,54 @@
   padding-bottom: 5px;
   padding-top: 5px;
 }
+
+.lightgrey {
+  background-color:#FAFAFA;
+}
+
+.activitybox {
+  /*background:#FFFFFF;*/
+  border:1px solid #AAA;
+  border-bottom:3px solid #BBB;  
+}
+
+.activitybox a {
+  color: #000000;
+  font-size: 18px;
+}
+
+.activitybox :hover {
+  cursor: pointer; cursor: hand;
+  text-decoration: none;
+}
+
+#activityboxTitle {
+	  color:#646464;
+	  font-size: 36px;
+	  padding:10px;
+}
+
+#activityboxDesc {
+	  color:#646464;
+	  padding:10px;
+	  font-size: 22px;
+}
+
+#activityboxLink {
+	  color:#444444;
+	  padding:10px;
+	  font-size: 16px;
+}
+
+.red{
+  color:red;
+}
+.blue{
+  color:blue;
+}
+.green{
+  color:green;
+}
+.yellow{
+  color:green;
+}
