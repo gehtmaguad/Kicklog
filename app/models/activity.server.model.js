@@ -16,6 +16,11 @@ var ActivitySchema = new Schema({
 		required: 'Please fill Activity name',
 		trim: true /*Removes Whitespace from Beginning and End from String */
 	},
+	color: {
+		type: String, 
+		trim: true,
+		default: '#FFFFFF'
+	}, 	
 	description: {
 		type: String,
 		default: '',
