@@ -224,12 +224,12 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 			});			
 		};
 		
-		// Helper Function to refresh chart in hidden directive
-		$scope.refreshCharts = function () {
-      for (var i = 0; i < nv.graphs.length; i++) {
-    	  nv.graphs[i].update();
-      }
-    };		
+		// // Helper Function to refresh chart in hidden directive
+		// $scope.refreshCharts = function () {
+  //     for (var i = 0; i < nv.graphs.length; i++) {
+  //   	  nv.graphs[i].update();
+  //     }
+  //   };		
 
 		// Heat Map Data Summary Object 
 		// currently not used
