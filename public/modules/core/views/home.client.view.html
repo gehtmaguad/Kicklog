@@ -1,41 +1,16 @@
 <section class="row" data-ng-controller="HomeController">
 
-  <div class="row orange">
-    <carousel interval="myInterval">
-      <slide ng-repeat="slide in slides" active="slide.active">
-        <img ng-src="{{slide.image}}" style="margin:auto;display:block;">
-        <div class="carousel-caption">
-          <p style="color:#424242;font-size:48px;">{{slide.text}}</p>
-        </div>
-      </slide>
-    </carousel>
-  </div>
+    <div class="row orange">
+        <carousel interval="myInterval">
+            <slide ng-repeat="slide in slides" active="slide.active">
+                <img ng-src="{{slide.image}}" style="margin:auto;display:block;">
+                <div class="carousel-caption">
+                    <p style="color:#424242;font-size:48px;">{{slide.text}}</p>
+                </div>
+            </slide>
+        </carousel>
+    </div>
 
-    <!--<div class="row orange">-->
-    <!--    <div class="row" style="padding:20px;">-->
-    <!--        <h1>Manage your Progress</h1>-->
-    <!--        <h2>Take your life into your own hands and pursue your dream!</h2>-->
-    <!--    </div>-->
-    <!--    <div class="row" style="padding:20px; margin-bottom:40px;">-->
-    <!--        <div class="col-sm-6">-->
-    <!--            <img src="./modules/core/img/brand/lion.png" class="img-responsive center-block img-rounded" alt="hardwork">-->
-    <!--        </div>                -->
-    <!--        <div class="col-sm-6">-->
-    <!--            <p>gehtmaguad provides a service for tracking your progress on all tasks you are working on, so that you always know how much time and effort you put into your projects.</p>-->
-    <!--            <div class="row">-->
-    <!--                <div class="col-xs-6">-->
-    <!--                    <a href="#!/signup" class="btn btn-warning btn-lg btn-block text-center" role="button">-->
-    <!--                        <i class="glyphicon glyphicon-user"></i>-->
-    <!--                        Register                            -->
-    <!--                    </a>-->
-    <!--                </div>-->
-    <!--                <div class="col-xs-6">-->
-    <!--                    <a href="#!/signin">or login with your account</a>                     -->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</div>-->
     <div class="row yellow" style="padding-bottom:50px;">
         <h3>Track your personal goals and progress in 3 easy Steps:</h3>
         <div>
