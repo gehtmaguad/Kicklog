@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="row">  
-                    <div class="col-xs-6">
+                    <div class="col-md-6">
                     <div class="form-group">
                         <div class="input-group input-group-lg">
                             <span class="input-group-btn">
@@ -32,7 +32,7 @@
                         </div>
                     </div>                           
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-md-6">
                     <div class="form-group">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="basic-addon1">
@@ -42,17 +42,17 @@
                                 
                                 <div class="col-xs-4">
                                     <div class="input-group input-group-lg">
-                                        <input type="number" data-ng-model="entry.entryHours" ng-init="entry.entryHours=0" id="entryHours" name="hour" min="0" class="form-control"/> 
+                                        <input type="number" data-ng-model="entry.entryHours" ng-init="entry.entryHours=Math.floor(entry.entryDuration / 60 / 60)" id="entryHours" name="hour" min="0" class="form-control"/> 
                                     </div>
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="input-group input-group-lg">
-                                        <input type="number" data-ng-model="entry.entryMinutes" ng-init="entry.entryMinutes=0" id="entryMinutes" name="minutes" min="0" class="form-control"/> 
+                                        <input type="number" data-ng-model="entry.entryMinutes" ng-init="entry.entryMinutes=Math.floor(entry.entryDuration / 60 % 60)" id="entryMinutes" name="minutes" min="0" class="form-control"/> 
                                     </div>
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="input-group input-group-lg">    
-                                        <input type="number" data-ng-model="entry.entrySeconds" ng-init="entry.entrySeconds=0" id="entrySeconds" name="seconds" min="0" class="form-control"/> 
+                                        <input type="number" data-ng-model="entry.entrySeconds" ng-init="entry.entrySeconds=Math.floor(entry.entryDuration % 60 % 60)" id="entrySeconds" name="seconds" min="0" class="form-control"/> 
                                     </div>
                                 </div>
                             </div>

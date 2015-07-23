@@ -3,6 +3,8 @@
 angular.module('activities').controller('ActivitiesPushUpdateController', ['$scope','Activities', 'Notify',
 	function($scope, Activities, Notify) {
 		
+		$scope.Math = window.Math;
+		
 		// Update Entry from Activity (Delete old one and create new one)
 		this.update = function(pullEntry, pullActivity) {
 			var entry = pullEntry;
