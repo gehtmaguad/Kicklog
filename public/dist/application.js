@@ -84,174 +84,11 @@ angular.module('activities').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('activities').controller('ActivitiesCreateController', ['$scope', 'Activities', 'Notify',
-	function($scope, Activities, Notify ) {
-		
-		// Create new Activity
-		this.create = function() {
-			// Create new Activity object
-			var activity = new Activities ({
-				name: this.name,
-				description: this.description,
-			});
-
-			// Redirect after save
-			activity.$save(function(response) {
-				
-				Notify.sendMsg('NewActivity', {'id': response._id});
-
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-	}
-]);
-'use strict';
-
-angular.module('activities').controller('ActivitiesPushUpdateController', ['$scope','Activities', 'Notify',
-	function($scope, Activities, Notify) {
-		
-		// Update Entry from Activity (Delete old one and create new one)
-		this.update = function(pullEntry, pullActivity) {
-			var entry = pullEntry;
-			var activity = pullActivity;
-
-			activity.entries = activity.entries.filter(function (el) { return el._id !== entry._id;});
-			
-			activity.entries.push({
-				entryText: entry.entryText,
-				entryDatePicker: entry.entryDatePicker,
-				entryDuration: ( entry.entryHours * 60 * 60 ) + ( entry.entryMinutes * 60 ) + entry.entrySeconds,
-				entryDescription: entry.entryDescription
-			});			
-			
-			activity.$update(function() {
-			
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};		
-		
-		// Pull Entry from Activity
-		this.pull = function(pullEntry, pullActivity) {
-			var entry = pullEntry;
-			var activity = pullActivity;
-
-			activity.entries = activity.entries.filter(function (el) { return el._id !== entry._id;});
-			
-			activity.$update(function() {
-			
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-		
-	}
-]);
-'use strict';
-
-angular.module('activities').controller('ActivitiesPushController', ['$scope', 'Activities', 'Notify',
-	function($scope, Activities, Notify ) {
-		
-		/* Date Picker */
-		  $scope.open = function($event) {
-			$event.preventDefault();
-			$event.stopPropagation();
-		
-			$scope.opened = true;
-		  };
-		  
-			$scope.Date = function(){
-			   return new Date();
-			};
-		
-		  $scope.dateOptions = {
-		    formatYear: 'yy',
-		    startingDay: 1
-		  };
-		
-		  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-		  $scope.format = $scope.formats[0];
-		
-		  var tomorrow = new Date();
-		  tomorrow.setDate(tomorrow.getDate() + 1);
-		  var afterTomorrow = new Date();
-		  afterTomorrow.setDate(tomorrow.getDate() + 2);
-		  $scope.events =
-			[
-		  	{
-		        date: tomorrow,
-		    	status: 'full'
-		  	},
-		  	{
-		        date: afterTomorrow,
-		    	status: 'partially'
-		  	}
-			];		
-		
-		// Push Entry to Activity
-		this.push = function(pushActivity) {
-			var activity = pushActivity;
-			activity.entries.push({
-				entryText: this.entryText,
-				entryDatePicker: this.entryDatePicker,
-				entryDuration: ( this.entryHours * 60 * 60 ) + ( this.entryMinutes * 60 ) + this.entrySeconds,
-				entryDescription: this.entryDescription
-			});
-			
-			activity.$update(function() {
-			
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-	}
-]);
-'use strict';
-
-angular.module('activities').controller('ActivitiesUpdateController', ['$scope','Activities', 'Notify',
-	function($scope, Activities, Notify) {
-		
-		// Update existing Activity
-		this.update = function(updatedActivity) {
-			var activity = updatedActivity;
-
-			activity.$update(function() {
-
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-		
-		// Remove existing Activity
-		this.remove = function(deleteActivity) {
-			var activity = deleteActivity;
-			
-			if ( activity ) { 
-				activity.$remove(function(response){
-					Notify.sendMsg('NewActivity', {'id': response._id});
-				});
-
-				for (var i in this.activities) {
-					if (this.activities [i] === activity) {
-						this.activities.splice(i, 1);
-					}
-				}
-			} else {
-				this.activity.$remove(function() {
-				});
-			}
-		};		
-		
-	}
-]);
-'use strict';
-
 // Activities controller
 
 var activityApp = angular.module('activities');
 
-angular.module('activities').controller('ActivitiesController', ['$scope', '$stateParams', 'Authentication', 'Activities', '$modal', '$log',
+activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authentication', 'Activities', '$modal', '$log',
 	function($scope, $stateParams, Authentication, Activities, $modal, $log) {
 		
 		this.authentication = Authentication;
@@ -268,7 +105,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 	      	
 				  $scope.ok = function () {
 				  	
-				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// BUG: Not working, Modal can not be closed when ok
 				  	// if (createActivityForm.$valid) {
 				    // 	$modalInstance.close();
 				  	// }
@@ -299,7 +136,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 	      	
 			$scope.ok = function () {
 				  	
-			  	// BUGFIX: Not working, Modal can not be closed when ok
+			  	// BUG: Not working, Modal can not be closed when ok
 			  	// if (updateActivityForm.$valid) {
 			    // 	$modalInstance.close($scope.activity);
 			  	// }
@@ -336,7 +173,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 	      	
 				  $scope.ok = function () {
 				  	
-				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// BUG: Not working, Modal can not be closed when ok
 				  	// if (updateActivityForm.$valid) {
 				    // 	$modalInstance.close($scope.activity);
 				  	// }
@@ -374,7 +211,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 	      	
 				  $scope.ok = function () {
 				  	
-				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// BUG: Not working, Modal can not be closed when ok
 				  	// if (updateActivityForm.$valid) {
 				    // 	$modalInstance.close($scope.activity);
 				  	// }
@@ -433,11 +270,12 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 		      showXAxis: false,
 		      transitionDuration: 0,
 		      xAxis: {
-		          axisLabel: 'X Axis',
-		          axisLabelDistance: 300
+		          axisLabel: 'entries',
+		          axisLabelDistance: 500
 		      },
 		      yAxis: {
-		          axisLabel: 'Y Axis'
+		          axisLabel: 'hours',
+  						axisLabelDistance: 40
 		      },
 		      rotateLabels: 90
 		  }
@@ -466,49 +304,181 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 					$scope.heatMapDataObject[timestamp] = 1;
 					
 					// Bar Chart
-					$scope.data[0].values.push({'label': data.entries[j].entryDatePicker,'value':data.entries[j].entryDuration });
+					// BUG: if key exists add value to existing one
+					$scope.data[0].values.push({'label': data.entries[j].entryDatePicker.split('T')[0],'value':data.entries[j].entryDuration / 60 / 60 });
 				}				
 			});			
 		};
 		
-		// Helper Function to refresh chart in hidden directive
-		$scope.refreshCharts = function () {
-      for (var i = 0; i < nv.graphs.length; i++) {
-    	  nv.graphs[i].update();
-      }
-    };		
+	}
+]);
+'use strict';
 
-		// Heat Map Data Summary Object 
-		// currently not used
-		// $scope.heatMapDataObjectSummary = {};
-		// Activities.query(function(arr) {
-		// 	var i;
-		// 	for (i = 0; i < arr.length; i++) { 
-		// 		for(var j in arr[i].entries) {
-		// 			var timestamp = Date.parse(arr[i].entries[j].entryDatePicker)/1000;
-		// 			$scope.heatMapDataObjectSummary[timestamp] = 1;
-		// 		}
-		// 	}
-		// });
+angular.module('activities').controller('ActivitiesCreateController', ['$scope', 'Activities', 'Notify',
+	function($scope, Activities, Notify ) {
+		
+		var colors = new Array('#81C784','#FFFFFF','#64B5F6','#FFAB91','#A7FFEB',
+			'#CFD8DC','#FFB74D','#004159','#65A8C4','#AACEE2','#9A93EC','#00C590','#00ADCE');
+		
+		// Create new Activity
+		this.create = function() {
+			// Create new Activity object
+			var activity = new Activities ({
+				name: this.name,
+				description: this.description,
+				color: colors[Math.floor(Math.random()*colors.length)]
+			});
+
+			// Redirect after save
+			activity.$save(function(response) {
+				
+				Notify.sendMsg('NewActivity', {'id': response._id});
+
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+	}
+]);
+'use strict';
+
+angular.module('activities').controller('ActivitiesPushController', ['$scope', 'Activities', 'Notify',
+	function($scope, Activities, Notify ) {
+		
+		/* Date Picker */
+		  $scope.open = function($event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			
+    	$scope.format = 'yyyy-MM-dd';			
+		
+			$scope.opened = true;
+		  };
+		  
+			$scope.Date = function(){
+			   return new Date().toISOString().slice(0,10);
+			};
+			
+			$scope.dateOptions = {
+    		startingDay: 1
+  		};
+		
+		  var tomorrow = new Date();
+		  tomorrow.setDate(tomorrow.getDate() + 1);
+		  var afterTomorrow = new Date();
+		  afterTomorrow.setDate(tomorrow.getDate() + 2);
+		  $scope.events =
+			[
+		  	{
+		        date: tomorrow,
+		    	status: 'full'
+		  	},
+		  	{
+		        date: afterTomorrow,
+		    	status: 'partially'
+		  	}
+			];		
+		
+		// Push Entry to Activity
+		this.push = function(pushActivity) {
+			var activity = pushActivity;
+			activity.entries.push({
+				entryText: this.entryText,
+				entryDatePicker: this.entryDatePicker,
+				entryDuration: ( this.entryHours * 60 * 60 ) + ( this.entryMinutes * 60 ) + this.entrySeconds,
+				entryDescription: this.entryDescription
+			});
+			
+			activity.$update(function() {
+			
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+	}
+]);
+'use strict';
+
+angular.module('activities').controller('ActivitiesPushUpdateController', ['$scope','Activities', 'Notify',
+	function($scope, Activities, Notify) {
+		
+		$scope.Math = window.Math;
+		
+		// Update Entry from Activity (Delete old one and create new one)
+		this.update = function(pullEntry, pullActivity) {
+			var entry = pullEntry;
+			var activity = pullActivity;
+
+			activity.entries = activity.entries.filter(function (el) { return el._id !== entry._id;});
+			
+			activity.entries.push({
+				entryText: entry.entryText,
+				entryDatePicker: entry.entryDatePicker,
+				entryDuration: ( entry.entryHours * 60 * 60 ) + ( entry.entryMinutes * 60 ) + entry.entrySeconds,
+				entryDescription: entry.entryDescription
+			});			
+			
+			activity.$update(function() {
+			
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};		
+		
+		// Pull Entry from Activity
+		this.pull = function(pullEntry, pullActivity) {
+			var entry = pullEntry;
+			var activity = pullActivity;
+
+			activity.entries = activity.entries.filter(function (el) { return el._id !== entry._id;});
+			
+			activity.$update(function() {
+			
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
 		
 	}
 ]);
+'use strict';
 
-activityApp.directive('activityList', ['Activities', 'Notify', function(Activities,Notify) {
-	return {
-		restrict: 'E',
-		transclude: true,
-		templateUrl: 'modules/activities/views/activity-list-template.html',
-		link: function(scope, element, attrs) {
-			
-			// when a new activity is added, update the activity list
-			Notify.getMsg('NewActivity', function(event, data) {
-				// Find a list of Activities
-				scope.activitiesCtrl.activities = Activities.query();
+angular.module('activities').controller('ActivitiesUpdateController', ['$scope','Activities', 'Notify',
+	function($scope, Activities, Notify) {
+		
+		// Update existing Activity
+		this.update = function(updatedActivity) {
+			var activity = updatedActivity;
+
+			activity.$update(function() {
+
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
 			});
-		}
-	};
-}]);
+		};
+		
+		// Remove existing Activity
+		this.remove = function(deleteActivity) {
+			var activity = deleteActivity;
+			
+			if ( activity ) { 
+				activity.$remove(function(response){
+					Notify.sendMsg('NewActivity', {'id': response._id});
+				});
+
+				for (var i in this.activities) {
+					if (this.activities [i] === activity) {
+						this.activities.splice(i, 1);
+					}
+				}
+			} else {
+				this.activity.$remove(function() {
+				});
+			}
+		};		
+		
+	}
+]);
 'use strict';
 
 angular.module('activities').directive('activityList', ['Activities', 'Notify', function(Activities,Notify) {
@@ -532,14 +502,16 @@ angular.module('activities').directive('activityList', ['Activities', 'Notify', 
 angular.module('activities').filter('millSecondsToTimeString', [
 	function() {
 		return function(millseconds) {
-	    var seconds = Math.floor(millseconds / 1000);
-	    var days = Math.floor(seconds / 86400);
-	    var hours = Math.floor((seconds % 86400) / 3600);
-	    var minutes = Math.floor(((seconds % 86400) % 3600) / 60);
+	    var initseconds = Math.floor(millseconds / 1000);
+	    var days = Math.floor(initseconds / 86400);
+	    var hours = Math.floor((initseconds % 86400) / 3600);
+	    var minutes = Math.floor(((initseconds % 86400) % 3600) / 60);
+	    var seconds = Math.floor(((initseconds % 86400) % 3600) % 60);
 	    var timeString = '';
 	    if(days > 0) timeString += (days > 1) ? (days + ' days ') : (days + ' day ');
 	    if(hours > 0) timeString += (hours > 1) ? (hours + ' hours ') : (hours + ' hour ');
 	    if(minutes >= 0) timeString += (minutes > 1) ? (minutes + ' minutes ') : (minutes + ' minute ');
+	    if(seconds >= 0) timeString += (seconds > 1) ? (seconds + ' seconds ') : (seconds + ' second ');
 	    return timeString;
 		};
 	}
@@ -627,6 +599,31 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 	function($scope, Authentication) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
+		
+		// Carousel
+		$scope.myInterval = 5000;
+	  var slides = $scope.slides = [];
+	  
+	    slides.push({
+	      image: './modules/core/img/brand/carousel_activities.png',
+	      text: 'create activities'
+	    });	  
+
+	    slides.push({
+	      image: './modules/core/img/brand/carousel_entries.png',
+	      text: 'keep track'
+	    });	  
+	    
+	    slides.push({
+	      image: './modules/core/img/brand/carousel_heatmap.png',
+	      text: 'check status'
+	    });	  
+	    
+	    slides.push({
+	      image: './modules/core/img/brand/carousel_barchart.png',
+	      text: 'show duration'
+	    });	  	    
+
 	}
 ]);
 'use strict';
