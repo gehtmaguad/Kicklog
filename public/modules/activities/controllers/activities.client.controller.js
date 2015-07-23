@@ -186,11 +186,12 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 		      showXAxis: false,
 		      transitionDuration: 0,
 		      xAxis: {
-		          axisLabel: 'X Axis',
-		          axisLabelDistance: 300
+		          axisLabel: 'entries',
+		          axisLabelDistance: 500
 		      },
 		      yAxis: {
-		          axisLabel: 'Y Axis'
+		          axisLabel: 'hours',
+  						axisLabelDistance: 40
 		      },
 		      rotateLabels: 90
 		  }
@@ -219,7 +220,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 					$scope.heatMapDataObject[timestamp] = 1;
 					
 					// Bar Chart
-					$scope.data[0].values.push({'label': data.entries[j].entryDatePicker,'value':data.entries[j].entryDuration });
+					$scope.data[0].values.push({'label': data.entries[j].entryDatePicker.split('T')[0],'value':data.entries[j].entryDuration / 60 / 60 });
 				}				
 			});			
 		};
