@@ -21,7 +21,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 	      	
 				  $scope.ok = function () {
 				  	
-				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// BUG: Not working, Modal can not be closed when ok
 				  	// if (createActivityForm.$valid) {
 				    // 	$modalInstance.close();
 				  	// }
@@ -52,7 +52,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 	      	
 			$scope.ok = function () {
 				  	
-			  	// BUGFIX: Not working, Modal can not be closed when ok
+			  	// BUG: Not working, Modal can not be closed when ok
 			  	// if (updateActivityForm.$valid) {
 			    // 	$modalInstance.close($scope.activity);
 			  	// }
@@ -89,7 +89,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 	      	
 				  $scope.ok = function () {
 				  	
-				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// BUG: Not working, Modal can not be closed when ok
 				  	// if (updateActivityForm.$valid) {
 				    // 	$modalInstance.close($scope.activity);
 				  	// }
@@ -127,7 +127,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 	      	
 				  $scope.ok = function () {
 				  	
-				  	// BUGFIX: Not working, Modal can not be closed when ok
+				  	// BUG: Not working, Modal can not be closed when ok
 				  	// if (updateActivityForm.$valid) {
 				    // 	$modalInstance.close($scope.activity);
 				  	// }
@@ -220,6 +220,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 					$scope.heatMapDataObject[timestamp] = 1;
 					
 					// Bar Chart
+					// BUG: if key exists add value to existing one
 					$scope.data[0].values.push({'label': data.entries[j].entryDatePicker.split('T')[0],'value':data.entries[j].entryDuration / 60 / 60 });
 				}				
 			});			
