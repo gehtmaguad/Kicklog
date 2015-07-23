@@ -1,24 +1,13 @@
 <section data-ng-controller="ActivitiesController as activitiesCtrl">
     </br>
-    </br>
     <div class="row">
-      <div class="col-xs-12 col-sm-8">
-        <div class="input-group input-group-lg">
-          <input type="text" class="form-control" placeholder="Search for..." ng-model="searchText">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
-          </span>
-        </div><!-- /input-group -->
+      <div class="col-xs-10">
+        <h1 style="color:#646464;padding-left:20px;">Activity Board</h1>
       </div>
-      <div class="col-xs-12 col-sm-4 text-center">
-          <button type="button" class="btn btn-warning text-center" ng-click="activitiesCtrl.modalCreate('lg')">
-            <i class="glyphicon glyphicon-cog"></i> </br>
-            New Activity
-          </button>
+      <div class="col-xs-2">
+        <button class="fab" style="float:right;" ng-click="activitiesCtrl.modalCreate('lg')">+</button>
       </div>
     </div>
-    </br>
-    </br>
     <activity-list></activity-list>
 
 </section>

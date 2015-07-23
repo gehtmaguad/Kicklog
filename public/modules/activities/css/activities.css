@@ -45,15 +45,21 @@
 	  font-size: 16px;
 }
 
-.red{
-  color:red;
+/* Fab Button */
+.fab {
+	  border:none;
+    font-size:1.5em;
+    color:white;
+    background-color: #ff9800;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    -webkit-box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+       -moz-box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+            box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
 }
-.blue{
-  color:blue;
-}
-.green{
-  color:green;
-}
-.yellow{
-  color:green;
+
+.fab:hover {
+  background-color: #ef6c00;
 }
