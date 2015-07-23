@@ -1,22 +1,13 @@
 <section data-ng-controller="ActivitiesController as activitiesCtrl" data-ng-init="findOne()">
-		</br>
-		</br>
-		<div class="row">
-			<div class="col-xs-12 col-sm-8">
-				<div class="input-group input-group-lg">
-					<input type="text" class="form-control" placeholder="Search for..." ng-model="searchEntryText">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button">Go!</button>
-					</span>
-				</div><!-- /input-group -->
-			</div>
-			<div class="col-xs-12 col-sm-4 text-center">
-					<button type="button" class="btn btn-warning text-center" ng-click="activitiesCtrl.modalPush('lg', activity)">
-						<i class="glyphicon glyphicon-cog"></i> </br>
-						New Entry
-					</button>
-			</div>
-		</div>
+    </br>	
+    <div class="row">
+      <div class="col-xs-10">
+        <h1 style="color:#646464;padding-left:20px;">Entry View</h1>
+      </div>
+      <div class="col-xs-2">
+        <button class="fab" style="float:right;" ng-click="activitiesCtrl.modalPush('lg', activity)">+</button>
+      </div>
+    </div>
 		</br>
     	<tabset justified="true">
       		<tab heading="Stats">
@@ -44,6 +35,13 @@
 				</div>  
       		</tab>       		
       		<tab heading="Entries">
+      			</br>
+      			<div class="input-group input-group-lg">
+					<input type="text" class="form-control" placeholder="Search for..." ng-model="searchEntryText">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button">Go!</button>
+					</span>
+				</div>
 				</br>
 				<accordion close-others="oneAtATime">
 				    <accordion-group is-open="status.open" ng-repeat="entry in activity.entries | filter:searchEntryText | orderBy:'entryDatePicker':true">
