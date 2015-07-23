@@ -4,7 +4,7 @@
 
 var activityApp = angular.module('activities');
 
-angular.module('activities').controller('ActivitiesController', ['$scope', '$stateParams', 'Authentication', 'Activities', '$modal', '$log',
+activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authentication', 'Activities', '$modal', '$log',
 	function($scope, $stateParams, Authentication, Activities, $modal, $log) {
 		
 		this.authentication = Authentication;
