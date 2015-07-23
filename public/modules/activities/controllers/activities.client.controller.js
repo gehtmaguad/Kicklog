@@ -224,25 +224,5 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 			});			
 		};
 		
-		// // Helper Function to refresh chart in hidden directive
-		// $scope.refreshCharts = function () {
-  //     for (var i = 0; i < nv.graphs.length; i++) {
-  //   	  nv.graphs[i].update();
-  //     }
-  //   };		
-
-		// Heat Map Data Summary Object 
-		// currently not used
-		// $scope.heatMapDataObjectSummary = {};
-		// Activities.query(function(arr) {
-		// 	var i;
-		// 	for (i = 0; i < arr.length; i++) { 
-		// 		for(var j in arr[i].entries) {
-		// 			var timestamp = Date.parse(arr[i].entries[j].entryDatePicker)/1000;
-		// 			$scope.heatMapDataObjectSummary[timestamp] = 1;
-		// 		}
-		// 	}
-		// });
-		
 	}
 ]);
