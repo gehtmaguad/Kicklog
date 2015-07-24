@@ -217,7 +217,11 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 					
 					// Heat Map
 					var timestamp = Date.parse(data.entries[j].entryDatePicker)/1000;
-					$scope.heatMapDataObject[timestamp] = 1;
+					if (timestamp in $scope.heatMapDataObject) {
+						$scope.heatMapDataObject[timestamp] += 1;
+					} else {
+						$scope.heatMapDataObject[timestamp] = 1;
+					}
 					
 					// Bar Chart
 					// check if key exists add value to existing one
