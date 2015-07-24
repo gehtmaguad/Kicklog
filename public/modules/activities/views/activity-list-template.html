@@ -1,6 +1,6 @@
 <div class="list-group">
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 adding-vertical-space" data-ng-repeat="activity in activitiesCtrl.activities">
-        <div ng-style="{ 'background' : activity.color }" class="activitybox">
+        <div ng-style="{ 'background' : activity.color;}" class="activitybox shadow">
             <a  data-ng-href="#!/activities/{{activity._id}}">
                 <div>
                     <p id="activityboxTitle">{{activity.name}}</p>
