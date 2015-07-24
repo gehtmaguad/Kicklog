@@ -301,11 +301,23 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 					
 					// Heat Map
 					var timestamp = Date.parse(data.entries[j].entryDatePicker)/1000;
-					$scope.heatMapDataObject[timestamp] = 1;
+					if (timestamp in $scope.heatMapDataObject) {
+						$scope.heatMapDataObject[timestamp] += 1;
+					} else {
+						$scope.heatMapDataObject[timestamp] = 1;
+					}
 					
 					// Bar Chart
-					// BUG: if key exists add value to existing one
-					$scope.data[0].values.push({'label': data.entries[j].entryDatePicker.split('T')[0],'value':data.entries[j].entryDuration / 60 / 60 });
+					// BUG: Check is wrong implemented
+					// check if key exists add value to existing one
+				  for (var i = 0; i < $scope.data[0].values.length; i++) {
+				    if ( $scope.data[0].values[i].label === new Date(Date.parse(data.entries[j].entryDatePicker)).toLocaleDateString() ) {
+				      $scope.data[0].values[i].value += data.entries[j].entryDuration / 60 / 60 ;
+				      continue;
+				    }
+				  }					
+					
+					$scope.data[0].values.push({'label': new Date(Date.parse(data.entries[j].entryDatePicker)).toLocaleDateString(), 'value':data.entries[j].entryDuration / 60 / 60 });
 				}				
 			});			
 		};

@@ -10,7 +10,7 @@
     </div>
 		</br>
     	<tabset justified="true">
-      		<tab heading="Stats">
+      		<tab style="cursor: pointer; cursor: hand;" heading="Stats">
       			</br>
       			<div class="visible-lg activitybox">
       				<p id="activityboxTitle">Calendar Heatmap</p>
@@ -34,7 +34,7 @@
 					<nvd3 options="options" data="data"></nvd3>
 				</div>  
       		</tab>       		
-      		<tab heading="Entries">
+      		<tab style="cursor: pointer; cursor: hand;" heading="Entries">
       			</br>
       			<div class="input-group input-group-lg">
 					<input type="text" class="form-control" placeholder="Search for..." ng-model="searchEntryText">
@@ -46,7 +46,7 @@
 				<accordion close-others="oneAtATime">
 				    <accordion-group is-open="status.open" ng-repeat="entry in activity.entries | filter:searchEntryText | orderBy:'entryDatePicker':true">
 				    	<accordion-heading> 
-				    		<div style="white-space: nowrap; overflow: hidden;">
+				    		<div style="white-space: nowrap; overflow: hidden; cursor: pointer; cursor: hand;">
 				    			{{entry.entryDatePicker | date:'yyyy-MM-dd'}}: {{entry.entryText}}
 				    			<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
 				    		</div>
