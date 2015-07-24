@@ -224,15 +224,16 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 					}
 					
 					// Bar Chart
+					// BUG: Check is wrong implemented
 					// check if key exists add value to existing one
 				  for (var i = 0; i < $scope.data[0].values.length; i++) {
-				    if ($scope.data[0].values[i].label === data.entries[j].entryDatePicker.split('T')[0]) {
+				    if ( $scope.data[0].values[i].label === new Date(Date.parse(data.entries[j].entryDatePicker)).toLocaleDateString() ) {
 				      $scope.data[0].values[i].value += data.entries[j].entryDuration / 60 / 60 ;
 				      continue;
 				    }
 				  }					
 					
-					$scope.data[0].values.push({'label': data.entries[j].entryDatePicker.split('T')[0],'value':data.entries[j].entryDuration / 60 / 60 });
+					$scope.data[0].values.push({'label': new Date(Date.parse(data.entries[j].entryDatePicker)).toLocaleDateString(), 'value':data.entries[j].entryDuration / 60 / 60 });
 				}				
 			});			
 		};
