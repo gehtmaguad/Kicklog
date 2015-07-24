@@ -220,7 +220,14 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 					$scope.heatMapDataObject[timestamp] = 1;
 					
 					// Bar Chart
-					// BUG: if key exists add value to existing one
+					// check if key exists add value to existing one
+				  for (var i = 0; i < $scope.data[0].values.length; i++) {
+				    if ($scope.data[0].values[i].label === data.entries[j].entryDatePicker.split('T')[0]) {
+				      $scope.data[0].values[i].value += data.entries[j].entryDuration / 60 / 60 ;
+				      continue;
+				    }
+				  }					
+					
 					$scope.data[0].values.push({'label': data.entries[j].entryDatePicker.split('T')[0],'value':data.entries[j].entryDuration / 60 / 60 });
 				}				
 			});			
