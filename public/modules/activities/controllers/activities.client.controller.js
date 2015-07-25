@@ -198,14 +198,15 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 		};
 		
 		// Data Object for Bar Chart
-    $scope.data = [
-      {
-        key: 'Cumulative Return',
-        values: [ ]
-      }
-  	];
-
-	  // Find existing Activity
+		var dataTemp = {};
+		$scope.data = [
+      		{
+        		key: 'Cumulative Return',
+        		values: [ ]
+      		}
+  		];
+	
+		// Find existing Activity
 		$scope.findOne = function() {
 			$scope.activity = Activities.get({ 
 				activityId: $stateParams.activityId
@@ -215,8 +216,12 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 			$scope.activity.$promise.then(function(data) {
 				for(var j in data.entries) {
 					
-					// Heat Map
 					var timestamp = Date.parse(data.entries[j].entryDatePicker)/1000;
+					var localtime = new Date(Date.parse(data.entries[j].entryDatePicker)).toLocaleDateString();
+					var duration = data.entries[j].entryDuration / 60 / 60;
+					
+					// Heat Map
+
 					if (timestamp in $scope.heatMapDataObject) {
 						$scope.heatMapDataObject[timestamp] += 1;
 					} else {
@@ -226,15 +231,31 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 					// Bar Chart
 					// BUG: Check is wrong implemented
 					// check if key exists add value to existing one
-				  for (var i = 0; i < $scope.data[0].values.length; i++) {
-				    if ( $scope.data[0].values[i].label === new Date(Date.parse(data.entries[j].entryDatePicker)).toLocaleDateString() ) {
-				      $scope.data[0].values[i].value += data.entries[j].entryDuration / 60 / 60 ;
-				      continue;
-				    }
-				  }					
+					if (localtime in dataTemp) {
+						dataTemp[localtime] += duration;
+					} else {
+						dataTemp[localtime] = duration;
+					}
 					
-					$scope.data[0].values.push({'label': new Date(Date.parse(data.entries[j].entryDatePicker)).toLocaleDateString(), 'value':data.entries[j].entryDuration / 60 / 60 });
-				}				
+					// $scope.data[0].values.push({'label': localtime, 'value': duration });
+					
+					// if ($scope.data[0].values.length > 0 ) {
+					// 	for (var i = 0; i < $scope.data[0].values.length; i++) {
+					// 		if ( $scope.data[0].values[i].label === localtime ) {
+					// 			$scope.data[0].values[i].value += duration;
+					// 		} else {
+					// 			$scope.data[0].values.push({'label': localtime, 'value': duration });
+					// 		}
+					// 	}
+					// } else {
+					// 	$scope.data[0].values.push({'label': localtime, 'value': duration });
+					// }
+				}
+				
+				for (var label in dataTemp) {
+				    $scope.data[0].values.push({'label': label, 'value': dataTemp[label] });
+				}	
+				
 			});			
 		};
 		
