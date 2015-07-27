@@ -229,29 +229,15 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 					}
 					
 					// Bar Chart
-					// BUG: Check is wrong implemented
-					// check if key exists add value to existing one
 					if (localtime in dataTemp) {
 						dataTemp[localtime] += duration;
 					} else {
 						dataTemp[localtime] = duration;
 					}
-					
-					// $scope.data[0].values.push({'label': localtime, 'value': duration });
-					
-					// if ($scope.data[0].values.length > 0 ) {
-					// 	for (var i = 0; i < $scope.data[0].values.length; i++) {
-					// 		if ( $scope.data[0].values[i].label === localtime ) {
-					// 			$scope.data[0].values[i].value += duration;
-					// 		} else {
-					// 			$scope.data[0].values.push({'label': localtime, 'value': duration });
-					// 		}
-					// 	}
-					// } else {
-					// 	$scope.data[0].values.push({'label': localtime, 'value': duration });
-					// }
+
 				}
 				
+				// Bar Chart
 				for (var label in dataTemp) {
 				    $scope.data[0].values.push({'label': label, 'value': dataTemp[label] });
 				}	
