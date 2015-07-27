@@ -214,6 +214,11 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 			
 			// Activity Data Object Callback Function
 			$scope.activity.$promise.then(function(data) {
+				
+				data.entries.sort(function(a,b){
+					return new Date(a.entryDatePicker) - new Date(b.entryDatePicker);
+				});
+					
 				for(var j in data.entries) {
 					
 					var timestamp = Date.parse(data.entries[j].entryDatePicker)/1000;
@@ -234,8 +239,8 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 					} else {
 						dataTemp[localtime] = duration;
 					}
-
 				}
+				
 				
 				// Bar Chart
 				for (var label in dataTemp) {
