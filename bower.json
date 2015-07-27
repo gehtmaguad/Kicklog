@@ -1,6 +1,6 @@
 {
   "name": "merciless",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
   "dependencies": {
     "bootstrap": "~3",
