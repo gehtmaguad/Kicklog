@@ -10,9 +10,7 @@
 .ng-invalid.ng-dirty {
 	border-color: #FA787E;
 }
-.ng-valid.ng-dirty {
-	border-color: #FFC107;
-}
+
 .landingbox {
   border:1px solid #AAA;
   border-bottom:3px solid #BBB;  
