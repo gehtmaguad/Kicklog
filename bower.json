@@ -1,7 +1,7 @@
 {
-  "name": "merciless",
+  "name": "kicklog",
   "version": "0.6.0",
-  "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
+  "description": "Simple Activity Tracking Tool",
   "dependencies": {
     "bootstrap": "~3",
     "angular": "~1.3",

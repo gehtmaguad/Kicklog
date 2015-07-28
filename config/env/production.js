@@ -56,7 +56,7 @@ module.exports = {
 		callbackURL: '/auth/github/callback'
 	},
 	mailer: {
-		from: 'Mean Stack Admin <markus.hoesel@gmx.at>',
+		from: 'Kicklog <markus.hoesel@gmx.at>',
 		options: {
 			service: 'Mailgun',
 			auth: {

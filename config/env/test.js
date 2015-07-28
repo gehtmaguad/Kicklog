@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/merciless-test',
+	db: 'mongodb://gehtmaguad:ikt255M88@ds045031.mongolab.com:45031/mean-database',
 	port: 3001,
 	app: {
-		title: 'merciless - Test Environment'
+		title: 'kicklog - Test Environment'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

@@ -2,7 +2,7 @@
 
 module.exports = {
 	port: 443,
-	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/merciless',
+	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://gehtmaguad:ikt255M88@ds045031.mongolab.com:45031/mean-database',
 	assets: {
 		lib: {
 			css: [

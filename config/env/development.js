@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://gehtmaguad:ikt255M88@ds045031.mongolab.com:45031/mean-database',
 	app: {
-		title: 'gehtmaguad - Development Environment'
+		title: 'kicklog - Development Environment'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
@@ -43,7 +43,7 @@ module.exports = {
 	} 
 	*/
 	mailer: {
-		from: 'Mean Stack Admin <markus.hoesel@gmx.at>',
+		from: 'Kicklog <markus.hoesel@gmx.at>',
 		options: {
 			service: 'Mailgun',
 			auth: {

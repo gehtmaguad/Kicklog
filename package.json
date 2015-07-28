@@ -1,8 +1,8 @@
 {
-	"name": "gehtmaguad",
-	"description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
-	"version": "1.2.0",
-	"author": "Gehtmaguad",
+	"name": "kicklog",
+	"description": "Simple Activity Tracking Tool",
+	"version": "0.6.0",
+	"author": "hoeselm",
 	"engines": {
 		"node": "0.10.x",
 		"npm": "1.4.x"

@@ -2,9 +2,9 @@
 
 module.exports = {
 	app: {
-		title: 'gehtmaguad',
-		description: 'Project History App',
-		keywords: 'MongoDB, Express, AngularJS, Node.js'
+		title: 'kicklog',
+		description: 'Simple Activity Tracking Tool',
+		keywords: 'Activities, Goals, Tracking, Monitoring'
 	},
 	port: process.env.PORT || 3000,
 	templateEngine: 'swig',
