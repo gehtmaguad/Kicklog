@@ -1,68 +1,77 @@
 <section data-ng-controller="ActivitiesController as activitiesCtrl" data-ng-init="findOne()">
-    </br>	
-    <div class="row">
-      <div class="col-xs-10">
-        <h1 style="color:#646464;padding-left:20px;"><a data-ng-href="#!/activities">Activity Board</a> > {{activity.name}}</h1>
-      </div>
-      <div class="col-xs-2">
-        <button class="fab" style="float:right;" ng-click="activitiesCtrl.modalPush('lg', activity)">+</button>
-      </div>
-    </div>
-		</br>
-    	<tabset justified="true">
-      		<tab style="cursor: pointer; cursor: hand;" heading="Stats">
-      			</br>
-      			<div class="visible-lg activitybox">
-      				<p id="activityboxTitle">Calendar Heatmap</p>
-      				<cal-heatmap config="{data:heatMapDataObject,domain:'year',range : 1,cellSize:19}"></cal-heatmap>
-      			</div>
-				<div class="visible-md activitybox">
-					<p id="activityboxTitle">Calendar Heatmap</p>
-      				<cal-heatmap config="{data:heatMapDataObject,domain:'year',range : 1,cellSize:15}"></cal-heatmap>
-      			</div>			
-      			<div class="visible-sm activitybox">
-      				<p id="activityboxTitle">Calendar Heatmap</p>
-      				<cal-heatmap config="{data:heatMapDataObject,domain:'month',subDomain : 'day',range : 5, cellSize:22, start:heatMapMonthStartSmDevice}"></cal-heatmap>
-      			</div>
-      			<div class="visible-xs activitybox">
-      				<p id="activityboxTitle">Calendar Heatmap</p>
-      				<cal-heatmap config="{data:heatMapDataObject,domain:'month',subDomain : 'day',range : 3, cellSize:22, start:heatMapMonthStartXsDevice}"></cal-heatmap>
-      			</div> 
-      			</br>
-      			<div class="activitybox">
-      				<p id="activityboxTitle">Bar Chart</p>
-					<nvd3 options="options" data="data"></nvd3>
-				</div>  
-      		</tab>       		
-      		<tab style="cursor: pointer; cursor: hand;" heading="Entries">
-      			</br>
-      			<div class="input-group input-group-lg">
-					<input type="text" class="form-control" placeholder="Search for..." ng-model="searchEntryText">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button">Go!</button>
-					</span>
-				</div>
-				</br>
-				<accordion close-others="oneAtATime">
-				    <accordion-group is-open="status.open" ng-repeat="entry in activity.entries | filter:searchEntryText | orderBy:'entryDatePicker':true">
-				    	<accordion-heading> 
-				    		<div style="white-space: nowrap; overflow: hidden; cursor: pointer; cursor: hand;">
-				    			{{entry.entryDatePicker | date:'yyyy-MM-dd'}}: {{entry.entryText}}
-				    			<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-				    		</div>
-						</accordion-heading>
-						<div style="border-bottom: 1px solid #646464; margin-bottom:10px;">
-		      				<p style="color:#646464; font-size: 22px;padding:5px; ">Duration: {{entry.entryDuration * 1000 | millSecondsToTimeString  }}</p>
-		      				<p style="color:#646464; font-size: 22px;padding:5px; word-break: break-all; ">Description: {{entry.entryDescription}}</p>
-		      			</div>
-		      			<div>
-            				<a ng-click="activitiesCtrl.modalPushUpdate('lg', entry, activity)">
-                				<p style="cursor: pointer;cursor: hand;" id="activityboxLink">Edit</p>
-            				</a>		      				
-		      			</div>
-		    		</accordion-group>
-				</accordion>
-        	</tab>
-    	</tabset>		
-		</br>
+  	</br>	
+  	<div class="row">
+    	<div class="col-xs-10">
+      		<h1 style="color:#646464;padding-left:20px;"><a data-ng-href="#!/activities">Activity Board</a> > {{activity.name}}</h1>
+    	</div>
+    	<div class="col-xs-2">
+      		<button class="fab" style="float:right;" ng-click="activitiesCtrl.modalPush('lg', activity)">+</button>
+    	</div>
+  	</div>
+	</br>
+	<tabset justified="true">
+		<tab style="cursor: pointer; cursor: hand;" heading="Stats">
+			</br>
+			<div class="visible-lg activitybox">
+				<p id="activityboxTitle">Calendar Heatmap</p>
+				<cal-heatmap config="{data:heatMapDataObject,domain:'year',range : 1,cellSize:19}"></cal-heatmap>
+			</div>
+			<div class="visible-md activitybox">
+				<p id="activityboxTitle">Calendar Heatmap</p>
+				<cal-heatmap config="{data:heatMapDataObject,domain:'year',range : 1,cellSize:15}"></cal-heatmap>
+			</div>			
+			<div class="visible-sm activitybox">
+				<p id="activityboxTitle">Calendar Heatmap</p>
+				<cal-heatmap config="{data:heatMapDataObject,domain:'month',subDomain : 'day',range : 5, cellSize:22, start:heatMapMonthStartSmDevice}"></cal-heatmap>
+			</div>
+			<div class="visible-xs activitybox">
+				<p id="activityboxTitle">Calendar Heatmap</p>
+				<cal-heatmap config="{data:heatMapDataObject,domain:'month',subDomain : 'day',range : 3, cellSize:22, start:heatMapMonthStartXsDevice}"></cal-heatmap>
+			</div> 			
+			
+			</br>
+			<div class="activitybox">
+				<p id="activityboxTitle">Statistics</p>
+				<p id="activityboxDesc">Entry Count: {{entry_summary}}</p>
+				<p id="activityboxDesc">Duration Summary: {{duration_summary * 1000 | millSecondsToTimeString}}</p>
+				<p id="activityboxDesc">Average Duration: {{duration_average * 1000 | millSecondsToTimeString}}</p>
+			</div>
+			
+			</br>
+			<div class="activitybox">
+				<p id="activityboxTitle">Bar Chart</p>
+				<nvd3 options="options" data="data"></nvd3>
+			</div>  
+		</tab>       		
+		<tab style="cursor: pointer; cursor: hand;" heading="Entries">
+			</br>
+			<div class="input-group input-group-lg">
+				<input type="text" class="form-control" placeholder="Search for..." ng-model="searchEntryText">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Go!</button>
+				</span>
+			</div>
+			</br>
+			<accordion close-others="oneAtATime">
+	    	<accordion-group is-open="status.open" ng-repeat="entry in activity.entries | filter:searchEntryText | orderBy:'entryDatePicker':true">
+	    		<accordion-heading> 
+	    			<div style="white-space: nowrap; overflow: hidden; cursor: pointer; cursor: hand;">
+	    				{{entry.entryDatePicker | date:'yyyy-MM-dd'}}: {{entry.entryText}}
+	    				<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+	    			</div>
+					</accordion-heading>
+					<div style="border-bottom: 1px solid #646464; margin-bottom:10px;">
+    				<p style="color:#646464; font-size: 22px;padding:5px; ">Duration: {{entry.entryDuration * 1000 | millSecondsToTimeString  }}</p>
+    				<p style="color:#646464; font-size: 22px;padding:5px; word-break: break-all; ">Description: {{entry.entryDescription}}</p>
+    			</div>
+    			<div>
+        		<a ng-click="activitiesCtrl.modalPushUpdate('lg', entry, activity)">
+        			<p style="cursor: pointer;cursor: hand;" id="activityboxLink">Edit</p>
+      			</a>		      				
+    			</div>
+  			</accordion-group>
+			</accordion>
+  		</tab>
+	</tabset>		
+	</br>
 </section>
