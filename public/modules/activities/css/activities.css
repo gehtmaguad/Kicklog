@@ -45,7 +45,7 @@
 	  border:none;
     font-size:1.5em;
     color:white;
-    background-color: #ff9800;
+    background-color: #66CCCC;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -56,7 +56,7 @@
 }
 
 .fab:hover {
-  background-color: #ef6c00;
+  background-color: #66EEEE;
 }
 
 .shadow:hover {
