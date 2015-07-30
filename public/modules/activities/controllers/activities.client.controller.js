@@ -164,7 +164,7 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	  $scope.heatMapMonthStartSmDevice = heatMapMonthStartSmDevice;
 	  
 	  var heatMapMonthStartXsDevice = new Date();
-	  heatMapMonthStartXsDevice.setMonth(heatMapMonthStartXsDevice.getMonth()-2);
+	  heatMapMonthStartXsDevice.setMonth(heatMapMonthStartXsDevice.getMonth());
 	  $scope.heatMapMonthStartXsDevice = heatMapMonthStartXsDevice;
 	  
 	  $scope.heatMapDataObject = {};
