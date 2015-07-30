@@ -254,10 +254,18 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 				    $scope.data[0].values.push({'label': label, 'value': dataTemp[label] });
 				}	
 				
-				// Duration Summary
+				// Days in this year
+				var now = new Date();
+				var start = new Date(now.getFullYear(), 0, 0);
+				var diff = now - start;
+				var oneDay = 1000 * 60 * 60 * 24;
+				var days_this_year = Math.ceil(diff / oneDay);
+				
+				// Stats
 				$scope.duration_summary = duration_summary;
 				$scope.entry_summary = entry_summary;
 				$scope.duration_average = duration_summary / entry_summary;
+				$scope.entry_average = Math.round(days_this_year / entry_summary * 100) / 100;
 				
 			});			
 		};
