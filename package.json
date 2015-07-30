@@ -1,7 +1,7 @@
 {
 	"name": "kicklog",
 	"description": "Simple Activity Tracking Tool",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"author": "hoeselm",
 	"engines": {
 		"node": "0.10.x",

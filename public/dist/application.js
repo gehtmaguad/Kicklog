@@ -248,7 +248,7 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 	  $scope.heatMapMonthStartSmDevice = heatMapMonthStartSmDevice;
 	  
 	  var heatMapMonthStartXsDevice = new Date();
-	  heatMapMonthStartXsDevice.setMonth(heatMapMonthStartXsDevice.getMonth()-2);
+	  heatMapMonthStartXsDevice.setMonth(heatMapMonthStartXsDevice.getMonth());
 	  $scope.heatMapMonthStartXsDevice = heatMapMonthStartXsDevice;
 	  
 	  $scope.heatMapDataObject = {};
@@ -302,12 +302,19 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 				data.entries.sort(function(a,b){
 					return new Date(a.entryDatePicker) - new Date(b.entryDatePicker);
 				});
+				
+				// Summary 
+				var duration_summary = 0;
+				var entry_summary = 0;
 					
 				for(var j in data.entries) {
 					
 					var timestamp = Date.parse(data.entries[j].entryDatePicker)/1000;
 					var localtime = new Date(Date.parse(data.entries[j].entryDatePicker)).toLocaleDateString();
 					var duration = data.entries[j].entryDuration / 60 / 60;
+					
+					duration_summary += data.entries[j].entryDuration;
+					entry_summary += 1;
 					
 					// Heat Map
 
@@ -330,6 +337,11 @@ activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authe
 				for (var label in dataTemp) {
 				    $scope.data[0].values.push({'label': label, 'value': dataTemp[label] });
 				}	
+				
+				// Duration Summary
+				$scope.duration_summary = duration_summary;
+				$scope.entry_summary = entry_summary;
+				$scope.duration_average = duration_summary / entry_summary;
 				
 			});			
 		};
