@@ -1,40 +1,38 @@
 <section data-ng-controller="ActivitiesCreateController as activityCreateCtrl">
-    
-    <div class="modal-header">
-        <h3 class="modal-title">New Activity</h3>
-    </div>
-    <div class="modal-body">
-            <form name="createActivityForm">
-                <fieldset>
-                <div class="form-group">
-		            <div data-ng-show="error" class="text-danger text-danger">
-                        <div class="alert alert-danger" role="alert">
-		                    <strong data-ng-bind="error"></strong>
-                        </div>
-		            </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="basic-addon1">
-                            <i class="text-muted glyphicon glyphicon-flag"></i>
-                        </span>
-                        <input type="text" data-ng-model="activityCreateCtrl.name" id="name" class="form-control" placeholder="Activity Name" required/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="basic-addon1">
-                            <i class="text-muted glyphicon glyphicon-tags"></i>
-                        </span>
-                        <input type="text" data-ng-model="activityCreateCtrl.description" id="description" class="form-control" placeholder="Description" required/>
-                    </div>
-                </div>
-                </fieldset>
-            </form>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-success" ng-click="activityCreateCtrl.create(); ok()" ng-disabled="createActivityForm.$invalid">Create Activity</button>
-        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-    </div>
-
+	<div class="modal-header">
+		<h3 class="modal-title">New Activity</h3>
+	</div>
+	<div class="modal-body">
+		<form name="createActivityForm">
+			<fieldset>
+				<div class="form-group">
+					<div data-ng-show="error" class="text-danger text-danger">
+						<div class="alert alert-danger" role="alert">
+							<strong data-ng-bind="error"></strong>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group input-group-lg">
+						<span class="input-group-addon" id="basic-addon1">
+							<i class="text-muted glyphicon glyphicon-flag"></i>
+						</span>
+						<input type="text" data-ng-model="activityCreateCtrl.name" id="name" class="form-control" placeholder="Activity Name" required/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group input-group-lg">
+						<span class="input-group-addon" id="basic-addon1">
+							<i class="text-muted glyphicon glyphicon-tags"></i>
+						</span>
+						<input type="text" data-ng-model="activityCreateCtrl.description" id="description" class="form-control" placeholder="Description" required/>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-success" ng-click="activityCreateCtrl.create(); ok()" ng-disabled="createActivityForm.$invalid">Create Activity</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
 </section>				    

@@ -1,76 +1,74 @@
 <section data-ng-controller="ActivitiesPushController as activityPushCtrl">
-    
-    <div class="modal-header">
-        <h3 class="modal-title">New Entry</h3>
-    </div>
-    <div class="modal-body">
-            <form name="pushActivityForm">
-                <fieldset>
-                <div class="form-group">
-		            <div data-ng-show="error" class="text-danger text-danger">
-                        <div class="alert alert-danger" role="alert">
-		                    <strong data-ng-bind="error"></strong>
-                        </div>
-		            </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="basic-addon1">
-                            <i class="text-muted glyphicon glyphicon-flag"></i>
-                        </span>
-                        <input type="text" ng-maxlength="25" data-ng-model="activityPushCtrl.entryText" id="entryText" class="form-control" placeholder="Activity Entry Name" required/>
-                    </div>
-                </div>
-                <div class="row">  
-                    <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                            </span>                        
-                            <input type="text" datepicker-popup="{{format}}" ng-model="activityPushCtrl.entryDatePicker" ng-init="activityPushCtrl.entryDatePicker=Date()" id="entryDatePicker" class="form-control" is-open="opened" ng-required="true" close-text="Close" />
-                        </div>
-                    </div>                           
-                    </div>
-                    <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon" id="basic-addon1">
-                                <i class="text-muted glyphicon glyphicon-time"></i>
-                            </span>                            
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <div class="input-group input-group-lg">
-                                        <input type="number" data-ng-model="activityPushCtrl.entryHours" ng-init="activityPushCtrl.entryHours=0" id="entryHours" name="hour" min="0" class="form-control"/> 
-                                    </div>
-                                </div>
-                                <div class="col-xs-4">
-                                    <div class="input-group input-group-lg">
-                                        <input type="number" data-ng-model="activityPushCtrl.entryMinutes" ng-init="activityPushCtrl.entryMinutes=0" id="entryMinutes" name="minutes" min="0" class="form-control"/> 
-                                    </div>
-                                </div>
-                                <div class="col-xs-4">
-                                    <div class="input-group input-group-lg">    
-                                        <input type="number" data-ng-model="activityPushCtrl.entrySeconds" ng-init="activityPushCtrl.entrySeconds=0" id="entrySeconds" name="seconds" min="0" class="form-control"/> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                    </div>    
-                </div>  
-                <div class="input-group input-group-lg">
-                    <span class="input-group-addon" id="basic-addon1">
-                        <i class="text-muted glyphicon glyphicon-pencil"></i>
-                    </span>
-                    <textarea style="resize: vertical;" data-ng-model="activityPushCtrl.entryDescription" id="entryDescription" class="form-control" placeholder="Activity Entry Description"></textarea>
-                </div>                
-                </fieldset>
-            </form>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-success" ng-click="activityPushCtrl.push(activity); ok()" ng-disabled="pushActivityForm.$invalid">Create Activity Entry</button>
-        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-    </div>
-
+	<div class="modal-header">
+		<h3 class="modal-title">New Entry</h3>
+	</div>
+	<div class="modal-body">
+		<form name="pushActivityForm">
+			<fieldset>
+				<div class="form-group">
+					<div data-ng-show="error" class="text-danger text-danger">
+						<div class="alert alert-danger" role="alert">
+							<strong data-ng-bind="error"></strong>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group input-group-lg">
+						<span class="input-group-addon" id="basic-addon1">
+							<i class="text-muted glyphicon glyphicon-flag"></i>
+						</span>
+						<input type="text" ng-maxlength="25" data-ng-model="activityPushCtrl.entryText" id="entryText" class="form-control" placeholder="Activity Entry Name" required/>
+					</div>
+				</div>
+				<div class="row">  
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group input-group-lg">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+								</span>                        
+								<input type="text" datepicker-popup="{{format}}" ng-model="activityPushCtrl.entryDatePicker" ng-init="activityPushCtrl.entryDatePicker=Date()" id="entryDatePicker" class="form-control" is-open="opened" ng-required="true" close-text="Close" />
+							</div>
+						</div>                           
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group input-group-lg">
+								<span class="input-group-addon" id="basic-addon1">
+									<i class="text-muted glyphicon glyphicon-time"></i>
+								</span>                            
+								<div class="row">
+									<div class="col-xs-4">
+										<div class="input-group input-group-lg">
+											<input type="number" data-ng-model="activityPushCtrl.entryHours" ng-init="activityPushCtrl.entryHours=0" id="entryHours" name="hour" min="0" class="form-control"/> 
+										</div>
+									</div>
+									<div class="col-xs-4">
+										<div class="input-group input-group-lg">
+											<input type="number" data-ng-model="activityPushCtrl.entryMinutes" ng-init="activityPushCtrl.entryMinutes=0" id="entryMinutes" name="minutes" min="0" class="form-control"/> 
+										</div>
+									</div>
+									<div class="col-xs-4">
+										<div class="input-group input-group-lg">    
+											<input type="number" data-ng-model="activityPushCtrl.entrySeconds" ng-init="activityPushCtrl.entrySeconds=0" id="entrySeconds" name="seconds" min="0" class="form-control"/> 
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>  
+					</div>    
+				</div>  
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon" id="basic-addon1">
+						<i class="text-muted glyphicon glyphicon-pencil"></i>
+					</span>
+					<textarea style="resize: vertical;" data-ng-model="activityPushCtrl.entryDescription" id="entryDescription" class="form-control" placeholder="Activity Entry Description"></textarea>
+				</div>                
+			</fieldset>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-success" ng-click="activityPushCtrl.push(activity); ok()" ng-disabled="pushActivityForm.$invalid">Create Activity Entry</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
 </section>				    

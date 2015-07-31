@@ -1,13 +1,13 @@
 <section data-ng-controller="ActivitiesController as activitiesCtrl" data-ng-init="findOne()">
-  	</br>	
-  	<div class="row">
-    	<div class="col-xs-10">
-      		<h1 style="color:#646464;padding-left:20px;"><a data-ng-href="#!/activities">Activity Board</a> > {{activity.name}}</h1>
-    	</div>
-    	<div class="col-xs-2">
-      		<button class="fab" style="float:right;" ng-click="activitiesCtrl.modalPush('lg', activity)">+</button>
-    	</div>
-  	</div>
+	</br>	
+	<div class="row">
+		<div class="col-xs-10">
+			<h1 style="color:#646464;padding-left:20px;"><a data-ng-href="#!/activities">Activity Board</a> > {{activity.name}}</h1>
+		</div>
+		<div class="col-xs-2">
+			<button class="fab" style="float:right;" ng-click="activitiesCtrl.modalPush('lg', activity)">+</button>
+		</div>
+	</div>
 	</br>
 	<tabset justified="true">
 		<tab style="cursor: pointer; cursor: hand;" heading="Stats">
@@ -15,7 +15,7 @@
 		</tab>       		
 		<tab style="cursor: pointer; cursor: hand;" heading="Entries">
 			<div ng-include="'./modules/activities/views/list-activity-entries-details.client.view.html'"></div>
-  		</tab>
+		</tab>
 	</tabset>		
 	</br>
 </section>
