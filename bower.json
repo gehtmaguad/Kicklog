@@ -1,6 +1,6 @@
 {
   "name": "kicklog",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple Activity Tracking Tool",
   "dependencies": {
     "bootstrap": "~3",
