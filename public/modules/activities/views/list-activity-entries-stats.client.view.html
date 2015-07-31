@@ -1,0 +1,32 @@
+</br>
+<div class="visible-lg activitybox">
+	<p id="activityboxTitle">Calendar Heatmap</p>
+	<cal-heatmap config="{data:heatMapDataObject,domain:'year',range:1,cellSize:19,legend:[1,2,3,4,5],legendColors:['#F8F8F8','#009799']}"></cal-heatmap>
+</div>
+<div class="visible-md activitybox">
+	<p id="activityboxTitle">Calendar Heatmap</p>
+	<cal-heatmap config="{data:heatMapDataObject,domain:'year',range:1,cellSize:15,legend:[1,2,3,4,5],legendColors:['#F8F8F8','#009799']}"></cal-heatmap>
+</div>			
+<div class="visible-sm activitybox">
+	<p id="activityboxTitle">Calendar Heatmap</p>
+	<cal-heatmap config="{data:heatMapDataObject,domain:'month',subDomain:'day',range:5,cellSize:22,start:heatMapMonthStartSmDevice,legend:[1,2,3,4,5],legendColors:['#F8F8F8','#009799']}"></cal-heatmap>
+</div>
+<div class="visible-xs activitybox">
+	<p id="activityboxTitle">Calendar Heatmap</p>
+	<cal-heatmap config="{data:heatMapDataObject,domain:'month',subDomain:'day',range:2,cellSize:22,start:heatMapMonthStartXsDevice,legend:[1,2,3,4,5],legendColors:['#F8F8F8','#009799']}"></cal-heatmap>
+</div> 			
+
+</br>
+<div class="activitybox">
+	<p id="activityboxTitle">Statistics</p>
+	<p id="activityboxDesc">Entry Count: {{entry_summary}} activities</p>
+	<p id="activityboxDesc">Entry Average: Every {{entry_average}} days</p>
+	<p id="activityboxDesc">Duration Summary: {{duration_summary * 1000 | millSecondsToTimeString}}</p>
+	<p id="activityboxDesc">Average Duration: {{duration_average * 1000 | millSecondsToTimeString}}</p>
+</div>
+
+</br>
+<div class="activitybox">
+	<p id="activityboxTitle">Bar Chart</p>
+	<nvd3 options="options" data="data"></nvd3>
+</div>  
