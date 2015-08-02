@@ -1,7 +1,8 @@
 'use strict';
+var credentials = require('./credentials.js');
 
 module.exports = {
-	db: 'mongodb://gehtmaguad:ikt255M88@ds045031.mongolab.com:45031/mean-database',
+	db: credentials.developmentDB,
 	app: {
 		title: 'kicklog - Development Environment'
 	},
@@ -30,26 +31,14 @@ module.exports = {
 		clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
 		callbackURL: '/auth/github/callback'
 	},
-	/*
+
 	mailer: {
-		from: process.env.MAILER_FROM || 'MAILER_FROM',
+		from: credentials.developmentMailer.from,
 		options: {
-			service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+			service: credentials.developmentMailer.service,
 			auth: {
-				user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
-			}
-		}
-	} 
-	*/
-	mailer: {
-		from: 'Kicklog <markus.hoesel@gmx.at>',
-		options: {
-			service: 'Mailgun',
-			auth: {
-				user: 'postmaster@mg.gehtmaguad.at',
-				pass: 'c6818d46877fc9360c1673600ca061b0'
-			}
+				user: credentials.developmentMailer.user,
+				pass: credentials.developmentMailer.pass			}
 		}
 	}	
 };

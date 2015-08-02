@@ -1,4 +1,5 @@
 'use strict';
+var credentials = require('./credentials.js');
 
 module.exports = {
 	app: {
@@ -8,7 +9,7 @@ module.exports = {
 	},
 	port: process.env.PORT || 3000,
 	templateEngine: 'swig',
-	sessionSecret: 'MEAN',
+	sessionSecret: credentials.sessionSecret,
 	sessionCollection: 'sessions',
 	assets: {
 		lib: {

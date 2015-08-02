@@ -1,7 +1,8 @@
 'use strict';
+var credentials = require('./credentials.js');
 
 module.exports = {
-	db: 'mongodb://gehtmaguad:ikt255M88@ds049631.mongolab.com:49631/mean-prod-database',
+	db: credentials.productionDB,
 	assets: {
 		lib: {
 			css: [
@@ -56,12 +57,12 @@ module.exports = {
 		callbackURL: '/auth/github/callback'
 	},
 	mailer: {
-		from: 'Kicklog <markus.hoesel@gmx.at>',
+		from: credentials.productionMailer.from,
 		options: {
-			service: 'Mailgun',
+			service: credentials.productionMailer.service,
 			auth: {
-				user: 'postmaster@mg.gehtmaguad.at',
-				pass: 'c6818d46877fc9360c1673600ca061b0'
+				user: credentials.productionMailer.user,
+				pass: credentials.productionMailer.pass
 			}
 		}
 	}	

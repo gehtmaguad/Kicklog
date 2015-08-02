@@ -7,4 +7,4 @@ public/lib
 app/tests/coverage/
 .bower-*/
 .idea/
-credentials.json
+config/env/credentials.js

@@ -1,7 +1,8 @@
 'use strict';
+var credentials = require('./credentials.js');
 
 module.exports = {
-	db: 'mongodb://gehtmaguad:ikt255M88@ds045031.mongolab.com:45031/mean-database',
+	db: credentials.testDB,
 	port: 3001,
 	app: {
 		title: 'kicklog - Test Environment'
