@@ -3,8 +3,8 @@
 angular.module('activities').controller('ActivitiesCreateController', ['$scope', 'Activities', 'Notify',
 	function($scope, Activities, Notify ) {
 		
-		var colors = new Array('#81C784','#FFFFFF','#64B5F6','#FFAB91','#A7FFEB',
-			'#CFD8DC','#FFB74D','#004159','#65A8C4','#AACEE2','#9A93EC','#00C590','#00ADCE');
+		var colors = new Array('#88CC88','#FFFFFF','#66CCDD','#FFAA99','#AAFFEE',
+			'#CFDCFD','#FFBB55','#004455','#66AACC','#AACCEE','#9A9A9A','#00CC99','#00ABCD');
 		
 		// Create new Activity
 		this.create = function() {
