@@ -1,0 +1,42 @@
+<section data-ng-controller="ActivitiesUpdateController as activityUpCtrl">
+	<div class="modal-header">
+		<h3 class="modal-title">Edit Activity</h3>
+	</div>
+	<div class="modal-body">
+		<form name="updateActivityForm">
+			<fieldset>
+				<div class="form-group">
+					<div data-ng-show="error" class="text-danger text-danger">
+						<div class="alert alert-danger" role="alert">
+							<strong data-ng-bind="error"></strong>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group input-group-lg">
+						<span class="input-group-addon" id="basic-addon1">
+							<i class="text-muted glyphicon glyphicon-flag"></i>
+						</span>
+						<input type="text" data-ng-model="activity.name" id="name" class="form-control" placeholder="Activity Name" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group input-group-lg">
+						<span class="input-group-addon" id="basic-addon1">
+							<i class="text-muted glyphicon glyphicon-tags"></i>
+						</span>
+						<input type="text" data-ng-model="activity.description" id="description" class="form-control" placeholder="Description" required>
+					</div>
+				</div>
+				</br>
+			</fieldset>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<span class="pull-left">
+			<button class="btn btn-danger" ng-click="activityUpCtrl.remove(activity); cancel()">Delete</button>
+		</span>        
+		<button class="btn btn-success" ng-click="activityUpCtrl.update(activity); ok()" ng-disabled="updateActivityForm.$invalid">OK</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>    
+</section>				

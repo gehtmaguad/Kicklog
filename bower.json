@@ -1,0 +1,21 @@
+{
+  "name": "kicklog",
+  "version": "1.0.6",
+  "description": "Simple Activity Tracking Tool",
+  "dependencies": {
+    "bootstrap": "~3",
+    "angular": "~1.3",
+    "angular-resource": "~1.3",
+    "angular-animate": "~1.3",
+    "angular-mocks": "~1.3",
+    "angular-cookies": "~1.3",
+    "angular-touch": "~1.3",
+    "angular-sanitize": "~1.3",
+    "angular-bootstrap": "~0.11.0",
+    "angular-ui-utils": "~0.1.1",
+    "angular-ui-router": "~0.2.10",
+    "angular-material": "~0.7.1",
+    "angular-nvd3": null,
+    "angular-cal-heatmap-directive-async": null
+  }
+}

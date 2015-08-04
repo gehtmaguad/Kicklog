@@ -1,0 +1,66 @@
+.adding-vertical-space{
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+.adding-vertical-space-5{
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.activitybox {
+  border:1px solid #AAA;
+  border-bottom:3px solid #BBB;  
+}
+
+.activitybox a {
+  color: #000000;
+  font-size: 18px;
+}
+
+.activitybox :hover {
+  cursor: pointer; cursor: hand;
+  text-decoration: none;
+}
+
+#activityboxTitle {
+	  color:#646464;
+	  font-size: 36px;
+	  padding:10px;
+}
+
+#activityboxDesc {
+	  color:#646464;
+	  padding:10px;
+	  font-size: 22px;
+}
+
+#activityboxLink {
+	  color:#444444;
+	  padding:10px;
+	  font-size: 16px;
+}
+
+/* Fab Button */
+.fab {
+	  border:none;
+    font-size:1.5em;
+    color:white;
+    background-color: #66CCCC;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    -webkit-box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+       -moz-box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+            box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+}
+
+.fab:hover {
+  background-color: #66EEEE;
+}
+
+.shadow:hover {
+      -webkit-box-shadow: 4px 5px 5px 0px rgba(41, 41, 41, .3);
+       -moz-box-shadow: 4px 5px 5px 0px rgba(41, 41, 41, .3);
+            box-shadow: 4px 5px 5px 0px rgba(41, 41, 41, .3);
+}

@@ -1,0 +1,30 @@
+<section data-ng-controller="ActivitiesController as activitiesCtrl">
+	</br>
+	<div class="row">
+		<div class="col-xs-10">
+			<h1 style="color:#646464;padding-left:20px;">Activity Board</h1>
+		</div>
+		<div class="col-xs-2">
+			<button class="fab" style="float:right;" ng-click="activitiesCtrl.modalCreate('lg')">+</button>
+		</div>
+	</div>
+	<div class="list-group">
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 adding-vertical-space" data-ng-repeat="activity in activitiesCtrl.activities">
+			<div ng-style="{ 'background' : activity.color}" class="activitybox shadow">
+				<a  data-ng-href="#!/activities/{{activity._id}}">
+					<div>
+						<p id="activityboxTitle">{{activity.name}}</p>
+						<p id="activityboxDesc" >{{activity.description}}</p>
+					</div>
+				</a>
+				<hr style="padding-left:20px;">
+				<a ng-click="activitiesCtrl.modalUpdate('lg', activity)">
+					<p id="activityboxLink">Edit</p>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="alert alert-warning text-center" data-ng-hide="!activities.$resolved || activities.length">
+		No Activities yet, why don't you <a href="/#!/activities/create">create one</a>?
+	</div>
+</section>

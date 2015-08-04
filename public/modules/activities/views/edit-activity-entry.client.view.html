@@ -1,0 +1,77 @@
+<section data-ng-controller="ActivitiesPushUpdateController as activityPushUpdateCtrl">
+	<div class="modal-header">
+		<h3 class="modal-title">Edit Entry</h3>
+	</div>
+	<div class="modal-body">
+		<form name="pushUpdateActivityForm">
+			<fieldset>
+				<div class="form-group">
+					<div data-ng-show="error" class="text-danger text-danger">
+						<div class="alert alert-danger" role="alert">
+							<strong data-ng-bind="error"></strong>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group input-group-lg">
+						<span class="input-group-addon" id="basic-addon1">
+							<i class="text-muted glyphicon glyphicon-flag"></i>
+						</span>
+						<input type="text" ng-maxlength="25" data-ng-model="entry.entryText" id="entryText" class="form-control" placeholder="Activity Entry Name" required/>
+					</div>
+				</div>
+				<div class="row">  
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group input-group-lg">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+								</span>                        
+								<input type="text" datepicker-popup="{{format}}" ng-model="entry.entryDatePicker" id="entryDatePicker" class="form-control" is-open="opened" ng-required="true" close-text="Close" />
+							</div>
+						</div>                           
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group input-group-lg">
+								<span class="input-group-addon" id="basic-addon1">
+									<i class="text-muted glyphicon glyphicon-time"></i>
+								</span>                            
+								<div class="row">
+									<div class="col-xs-4">
+										<div class="input-group input-group-lg">
+											<input type="number" data-ng-model="entry.entryHours" ng-init="entry.entryHours=Math.floor(entry.entryDuration / 60 / 60)" id="entryHours" name="hour" min="0" class="form-control"/> 
+										</div>
+									</div>
+									<div class="col-xs-4">
+										<div class="input-group input-group-lg">
+											<input type="number" data-ng-model="entry.entryMinutes" ng-init="entry.entryMinutes=Math.floor(entry.entryDuration / 60 % 60)" id="entryMinutes" name="minutes" min="0" class="form-control"/> 
+										</div>
+									</div>
+									<div class="col-xs-4">
+										<div class="input-group input-group-lg">    
+											<input type="number" data-ng-model="entry.entrySeconds" ng-init="entry.entrySeconds=Math.floor(entry.entryDuration % 60 % 60)" id="entrySeconds" name="seconds" min="0" class="form-control"/> 
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>  
+					</div>    
+				</div>  
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon" id="basic-addon1">
+						<i class="text-muted glyphicon glyphicon-pencil"></i>
+					</span>
+					<textarea style="resize: vertical;" data-ng-model="entry.entryDescription" id="entryDescription" class="form-control" placeholder="Activity Entry Description"></textarea>
+				</div>                
+			</fieldset>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<span class="pull-left">
+			<button class="btn btn-danger" ng-click="activityPushUpdateCtrl.pull(entry,activity); cancel()">Delete</button>
+		</span>    
+		<button class="btn btn-success" ng-click="activityPushUpdateCtrl.update(entry,activity); ok()" ng-disabled="pushActivityForm.$invalid">Update Activity Entry</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
+</section>				    
