@@ -4,13 +4,19 @@
 
 var activityApp = angular.module('activities');
 
-activityApp.controller('ActivitiesController', ['$scope', '$stateParams', 'Authentication', 'Activities', '$modal', '$log',
-	function($scope, $stateParams, Authentication, Activities, $modal, $log) {
+activityApp.controller('ActivitiesController', ['$scope', '$rootScope', '$stateParams', 'Authentication', 'Activities', 'Notify', '$modal', '$log',
+	function($scope, $rootScope, $stateParams, Authentication, Activities, Notify, $modal, $log) {
 		
 		this.authentication = Authentication;
 		
 		// Find a list of Activities
 		this.activities = Activities.query();
+		
+		// Listen to Broadcast and handle 
+		$scope.$on('ActivityCountChange', function(){
+			$scope.activitiesCtrl.activities = Activities.query();
+			console.log('message received on controller!!' + Notify.msg + Notify.data);
+		});
 		
 		// Open a modal window to Create a Activity Record
 		this.modalCreate = function (size) {

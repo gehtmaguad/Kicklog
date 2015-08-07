@@ -20,7 +20,7 @@ angular.module('activities').controller('ActivitiesUpdateController', ['$scope',
 			
 			if ( activity ) { 
 				activity.$remove(function(response){
-					Notify.sendMsg('NewActivity', {'id': response._id});
+					Notify.sendMsg('ActivityCountChange', {'id': response._id});
 				});
 
 				for (var i in this.activities) {

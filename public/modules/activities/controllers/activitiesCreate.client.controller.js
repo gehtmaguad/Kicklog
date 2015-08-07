@@ -18,7 +18,7 @@ angular.module('activities').controller('ActivitiesCreateController', ['$scope',
 			// Redirect after save
 			activity.$save(function(response) {
 				
-				Notify.sendMsg('NewActivity', {'id': response._id});
+				Notify.sendMsg('ActivityCountChange',response);
 
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;

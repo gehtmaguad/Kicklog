@@ -21,18 +21,9 @@ angular.module('activities')
 		var notify = {};
 		
 		notify.sendMsg = function(msg, data) {
-			data = data || {};
-			$rootScope.$emit(msg, data);
-			
-			console.log('message sent!');
-		};
-		
-		notify.getMsg = function(msg, func, scope) {
-			var unbind = $rootScope.$on(msg, func);
-			
-			if (scope) {
-				scope.$on('destroy', unbind);
-			}
+			this.msg = msg;
+			this.data = data || {};
+			$rootScope.$broadcast(this.msg);
 		};
 		
 		return notify;
