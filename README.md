@@ -1,6 +1,4 @@
 #Kicklog
-[![Kicklog Logo](http://www.kicklog.com/modules/core/img/brand/logo.png)](http://www.kicklog.com/)
-
 Task Tracker build on Mean.js.
 
 ## Live Example
